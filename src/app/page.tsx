@@ -1,9 +1,9 @@
-import styles from "./page.module.css";
+import Navbar from "./components/Navbar/Navbar";
 
-export default function Home() {
+export default function App() {
   return (
-    <main className={styles.main}>
-      <h1>E-Commerce</h1>
-    </main>
+    <>
+      <Navbar />
+    </>
   );
 }
