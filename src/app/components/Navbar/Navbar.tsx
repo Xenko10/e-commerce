@@ -10,6 +10,7 @@ export default function Navbar() {
         <a href='#contact'>About</a>
         <a href='#signup'>Sign Up</a>
       </div>
+      <button>☰</button>
       <div className={styles.actions}>
         <div className={styles.search}>
           <input type='text' placeholder='What are you looking for?' />
