@@ -1,6 +1,7 @@
 .header {
   background-color: black;
   color: white;
+  text-align: center;
 }
 
 .content {
@@ -27,7 +28,8 @@
 }
 
 .languageSelection {
-  align-self: flex-end;
+  margin-left: 1rem;
+  align-self: flex-start;
   cursor: pointer;
   border: none;
   background-color: black;
