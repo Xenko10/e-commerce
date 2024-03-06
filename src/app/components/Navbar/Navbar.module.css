@@ -6,7 +6,7 @@
   max-width: var(--max-width);
   padding: 2.5rem var(--padding) 1.25rem var(--padding);
   margin: 0 auto;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #cdbebe8c;
 }
 
 .logo {

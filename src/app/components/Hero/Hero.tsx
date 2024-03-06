@@ -1,9 +1,12 @@
 import styles from "./Hero.module.css";
+import Categories from "./Categories/Categories";
+import ImageSlider from "./ImageSlider/ImageSlider";
 
 export default function Hero() {
   return (
-    <div className='hero'>
-      <h1>Welcome to the site</h1>
+    <div className={styles.hero}>
+      <Categories />
+      <ImageSlider />
     </div>
   );
 }

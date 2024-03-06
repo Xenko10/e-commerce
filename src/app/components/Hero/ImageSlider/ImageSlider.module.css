@@ -1,0 +1,27 @@
+.imageSlider {
+  border-left: 2px solid #cdbebe8c;
+  padding: 2.5rem 0 0 2rem;
+  height: auto;
+}
+
+.imageSlider > img {
+  min-width: 37.5rem;
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+@media (max-width: 950px) {
+  .imageSlider {
+    border: none;
+    padding-left: 0;
+
+    max-width: var(--max-width);
+    padding: 1rem var(--padding);
+    margin: 0 auto;
+  }
+
+  .imageSlider > img {
+    min-width: 18.75rem;
+  }
+}
