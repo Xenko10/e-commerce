@@ -1,12 +1,12 @@
 import styles from "./Hero.module.css";
 import Categories from "./Categories/Categories";
-import ImageSlider from "./ImageSlider/ImageSlider";
+import MessageOfTheDay from "./MessageOfTheDay/MessageOfTheDay";
 
 export default function Hero() {
   return (
     <div className={styles.hero}>
       <Categories />
-      <ImageSlider />
+      <MessageOfTheDay />
     </div>
   );
 }
