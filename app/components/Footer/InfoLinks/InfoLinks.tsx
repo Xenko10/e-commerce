@@ -19,9 +19,9 @@ export default function InfoLinks() {
       <div className={styles.subsection}>
         <h3 className={styles.itemHeader}>Support</h3>
         <div className={styles.infoWrapper}>
-          <div>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</div>
+          <div>Plac Tadeusza Kościuszki 45, 22-460 Szczebrzeszyn</div>
           <div>exclusive@gmail.com</div>
-          <div>+88015-88888-9999</div>
+          <div>+688 987 654 321</div>
         </div>
       </div>
       <div className={styles.subsection}>
