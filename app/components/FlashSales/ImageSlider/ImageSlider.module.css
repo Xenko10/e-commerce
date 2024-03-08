@@ -1,4 +1,5 @@
 .imageSlider {
   display: flex;
   gap: 2rem;
+  overflow-x: hidden;
 }

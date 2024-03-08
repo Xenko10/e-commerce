@@ -44,6 +44,19 @@ export default function Product({
       <div className={styles.item}>
         <div className={styles.imgWrapper}>
           <img src={`/img/flashsales/${url}`} alt={alt} />
+          <div className={styles.percentages}>
+            -{Math.floor((1 - discount / price) * 100)}%
+          </div>
+          <img
+            src='./img/flashsales/like.png'
+            alt='like'
+            className={styles.like}
+          />
+          <img
+            src='./img/flashsales/follow.png'
+            alt='follow'
+            className={styles.follow}
+          />
         </div>
         <div className={styles.info}>
           <h3>{header}</h3>
