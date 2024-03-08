@@ -1,7 +1,17 @@
-import dynamic from "next/dynamic";
+import styles from "./FlashSales.module.css";
+import Timer from "./Timer/Timer";
 
-const FlashSales = dynamic(() => import("./FlashSalesComponent"), {
-  ssr: false,
-});
-
-export default FlashSales;
+export default function FlashSales() {
+  return (
+    <div className={styles.flashSales}>
+      <div className={styles.rectangleTodaysWrapper}>
+        <div className={styles.rectangle}></div>
+        <div className={styles.todays}>Today's</div>
+      </div>
+      <div className={styles.flashSalesTimerWrapper}>
+        <h2>Flash Sales</h2>
+        <Timer />
+      </div>
+    </div>
+  );
+}
