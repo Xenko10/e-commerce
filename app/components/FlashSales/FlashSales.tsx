@@ -1,5 +1,6 @@
 import styles from "./FlashSales.module.css";
 import Timer from "./Timer/Timer";
+import ImageSlider from "./ImageSlider/ImageSlider";
 
 export default function FlashSales() {
   return (
@@ -12,6 +13,7 @@ export default function FlashSales() {
         <h2>Flash Sales</h2>
         <Timer />
       </div>
+      <ImageSlider />
     </div>
   );
 }
