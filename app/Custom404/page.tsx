@@ -1,9 +1,9 @@
-import Contact from "./contact";
+import Custom404 from "./Custom404";
 
 export default function page() {
   return (
     <>
-      <Contact />
+      <Custom404 />
     </>
   );
 }
