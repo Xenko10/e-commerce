@@ -1,14 +1,17 @@
 import styles from "./Navbar.module.css";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
     <div className={styles.navbar}>
-      <div className={styles.logo}>Exclusive</div>
+      <div className={styles.logo}>
+        <Link href='/'>Exclusive</Link>
+      </div>
       <div className={styles.menu}>
-        <a href='#home'>Home</a>
-        <a href='#about'>Contact</a>
-        <a href='#contact'>About</a>
-        <a href='#signup'>Sign Up</a>
+        <Link href='/'>Home</Link>
+        <a href='/contact'>Contact</a>
+        <a href='/about'>About</a>
+        <a href='/signup'>Sign Up</a>
       </div>
       <button>☰</button>
       <div className={styles.actions}>

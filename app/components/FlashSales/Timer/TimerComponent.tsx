@@ -18,6 +18,8 @@ export default function TimerComponent() {
     endOfSale.setMinutes(59);
     endOfSale.setSeconds(59);
 
+    let timerId: NodeJS.Timeout;
+
     const timer = () => {
       const now = new Date();
       const diff = endOfSale.getTime() - now.getTime();
@@ -34,13 +36,13 @@ export default function TimerComponent() {
         .toString()
         .padStart(2, "0");
       setTime({ days, hours, minutes, seconds });
+
+      timerId = setTimeout(timer, 1000);
     };
 
     timer();
 
-    const timerId = setTimeout(timer, 1000);
-
-    return () => clearTimeout(timerId);
+    return () => timerId && clearTimeout(timerId);
   }, []);
 
   return (
