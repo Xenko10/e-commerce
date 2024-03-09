@@ -40,7 +40,7 @@ const products = [
   },
 ];
 
-export default function () {
+export default function ImageSlider() {
   return (
     <div className={styles.imageSlider}>
       {products.map((product) => (
