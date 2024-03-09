@@ -7,7 +7,7 @@ export default function FlashSales() {
     <div className={styles.flashSales}>
       <div className={styles.rectangleTodaysWrapper}>
         <div className={styles.rectangle}></div>
-        <div className={styles.todays}>Today's</div>
+        <div className={styles.todays}>Today&apos;s</div>
       </div>
       <div className={styles.flashSalesTimerWrapper}>
         <h2>Flash Sales</h2>
