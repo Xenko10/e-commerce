@@ -18,10 +18,9 @@ export default function TimerComponent() {
     endOfSale.setMinutes(59);
     endOfSale.setSeconds(59);
 
-    const timer = setInterval(() => {
+    const timer = () => {
       const now = new Date();
       const diff = endOfSale.getTime() - now.getTime();
-
       const days = Math.floor(diff / (3600000 * 24))
         .toString()
         .padStart(2, "0");
@@ -34,11 +33,14 @@ export default function TimerComponent() {
       const seconds = Math.floor((diff % 60000) / 1000)
         .toString()
         .padStart(2, "0");
-
       setTime({ days, hours, minutes, seconds });
-    }, 1000);
+    };
 
-    return () => clearInterval(timer);
+    timer();
+
+    const timerId = setTimeout(timer, 1000);
+
+    return () => clearTimeout(timerId);
   }, []);
 
   return (
