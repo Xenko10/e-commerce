@@ -1,7 +1,7 @@
 .flashSales {
   max-width: var(--max-width);
   padding: 0 var(--padding);
-  margin: 0 auto 4rem auto;
+  margin: 0 auto 2rem auto;
 }
 
 .rectangleTodaysWrapper {

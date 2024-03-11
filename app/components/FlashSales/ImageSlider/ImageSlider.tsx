@@ -1,5 +1,18 @@
-import styles from "./ImageSlider.module.css";
+"use client";
+
+import React from "react";
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 import Product from "./Product/Product";
+import styles from "./ImageSlider.module.css";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const products = [
   {
@@ -40,21 +53,42 @@ const products = [
   },
 ];
 
-export default function ImageSlider() {
-  return (
-    <div className={styles.imageSlider}>
-      {products.map((product) => (
-        <Product
-          key={product.header}
-          url={product.url}
-          alt={product.alt}
-          header={product.header}
-          price={product.price}
-          discount={product.discount}
-          stars={product.stars}
-          opinions={product.opinions}
-        />
-      ))}
-    </div>
-  );
+export default class extends React.Component {
+  render() {
+    return (
+      <CarouselProvider
+        naturalSlideWidth={270}
+        naturalSlideHeight={340}
+        totalSlides={products.length}
+        infinite={true}
+        isPlaying={true}
+        visibleSlides={3}
+        className={styles.sliderWrapper}>
+        <Slider>
+          {products.map((product, index) => (
+            <Slide index={index} key={product.header} className={styles.slide}>
+              <Product
+                key={product.header}
+                url={product.url}
+                alt={product.alt}
+                header={product.header}
+                price={product.price}
+                discount={product.discount}
+                stars={product.stars}
+                opinions={product.opinions}
+              />
+            </Slide>
+          ))}
+        </Slider>
+        <div className={styles.buttonWrapper}>
+          <ButtonBack>
+            <ArrowBackIcon />
+          </ButtonBack>
+          <ButtonNext>
+            <ArrowForwardIcon />
+          </ButtonNext>
+        </div>
+      </CarouselProvider>
+    );
+  }
 }
