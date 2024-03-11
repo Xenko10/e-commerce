@@ -53,42 +53,40 @@ const products = [
   },
 ];
 
-export default class extends React.Component {
-  render() {
-    return (
-      <CarouselProvider
-        naturalSlideWidth={270}
-        naturalSlideHeight={340}
-        totalSlides={products.length}
-        infinite={true}
-        isPlaying={true}
-        visibleSlides={3}
-        className={styles.sliderWrapper}>
-        <Slider>
-          {products.map((product, index) => (
-            <Slide index={index} key={product.header} className={styles.slide}>
-              <Product
-                key={product.header}
-                url={product.url}
-                alt={product.alt}
-                header={product.header}
-                price={product.price}
-                discount={product.discount}
-                stars={product.stars}
-                opinions={product.opinions}
-              />
-            </Slide>
-          ))}
-        </Slider>
-        <div className={styles.buttonWrapper}>
-          <ButtonBack>
-            <ArrowBackIcon />
-          </ButtonBack>
-          <ButtonNext>
-            <ArrowForwardIcon />
-          </ButtonNext>
-        </div>
-      </CarouselProvider>
-    );
-  }
+export default function ImageSlider() {
+  return (
+    <CarouselProvider
+      naturalSlideWidth={270}
+      naturalSlideHeight={340}
+      totalSlides={products.length}
+      infinite={true}
+      isPlaying={true}
+      visibleSlides={3}
+      className={styles.sliderWrapper}>
+      <Slider>
+        {products.map((product, index) => (
+          <Slide index={index} key={product.header} className={styles.slide}>
+            <Product
+              key={product.header}
+              url={product.url}
+              alt={product.alt}
+              header={product.header}
+              price={product.price}
+              discount={product.discount}
+              stars={product.stars}
+              opinions={product.opinions}
+            />
+          </Slide>
+        ))}
+      </Slider>
+      <div className={styles.buttonWrapper}>
+        <ButtonBack>
+          <ArrowBackIcon />
+        </ButtonBack>
+        <ButtonNext>
+          <ArrowForwardIcon />
+        </ButtonNext>
+      </div>
+    </CarouselProvider>
+  );
 }
