@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default async function NotFound() {
-  redirect("/Custom404");
+  redirect("/custom404");
 }
