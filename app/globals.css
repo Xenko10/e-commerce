@@ -24,3 +24,8 @@
 body {
   margin: 0;
 }
+
+/* disable blue outlines on slides (https://github.com/express-labs/pure-react-carousel/issues/203) */
+.focusRing___1airF.carousel__slide-focus-ring {
+  outline: none !important;
+}

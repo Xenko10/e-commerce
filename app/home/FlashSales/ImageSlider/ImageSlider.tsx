@@ -99,7 +99,9 @@ export default function ImageSlider() {
       infinite={true}
       isPlaying={true}
       visibleSlides={slides}
-      className={styles.sliderWrapper}>
+      className={styles.sliderWrapper}
+      dragEnabled={false}
+      touchEnabled={false}>
       <Slider>
         {products.map((product, index) => (
           <Slide index={index} key={product.header} className={styles.slide}>
