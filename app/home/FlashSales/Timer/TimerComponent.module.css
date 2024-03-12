@@ -3,6 +3,12 @@
   gap: 1.5rem;
 }
 
+@media (max-width: 425px) {
+  .timer {
+    gap: 0.5rem;
+  }
+}
+
 .timer > div {
   gap: 0.375rem;
   display: flex;
@@ -15,9 +21,21 @@
   font-weight: 750;
 }
 
+@media (max-width: 425px) {
+  .timeNumber {
+    font-size: 1.5rem;
+  }
+}
+
 .colon {
   align-self: center;
   color: #e07575;
   font-size: 2rem;
   margin-bottom: 0.25rem;
+}
+
+@media (max-width: 425px) {
+  .colon {
+    font-size: 1.5em;
+  }
 }
