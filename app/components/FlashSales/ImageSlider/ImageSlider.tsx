@@ -20,7 +20,7 @@ const products = [
     alt: "gamepad",
     header: "HAVIT HV-G92 Gamepad",
     price: 160,
-    discount: 120,
+    priceAfterDiscount: 120,
     stars: 4.5,
     opinions: 88,
   },
@@ -29,7 +29,7 @@ const products = [
     alt: "keyboard",
     header: "AK-900 Wired Keyboard",
     price: 1160,
-    discount: 920,
+    priceAfterDiscount: 920,
     stars: 4,
     opinions: 75,
   },
@@ -38,7 +38,7 @@ const products = [
     alt: "monitor",
     header: "IPS LCD Gaming Monitor",
     price: 400,
-    discount: 240,
+    priceAfterDiscount: 240,
     stars: 5,
     opinions: 121,
   },
@@ -47,9 +47,27 @@ const products = [
     alt: "chair",
     header: "S-Series Comfort Chair",
     price: 400,
-    discount: 160,
+    priceAfterDiscount: 160,
     stars: 3.5,
     opinions: 99,
+  },
+  {
+    url: "laptop.png",
+    alt: "laptop",
+    header: "ASUS FHD Gaming Laptop",
+    price: 700,
+    priceAfterDiscount: 525,
+    stars: 5,
+    opinions: 325,
+  },
+  {
+    url: "camera.png",
+    alt: "camera",
+    header: "CANON EOS DSLR Camera",
+    price: 360,
+    priceAfterDiscount: 270,
+    stars: 4,
+    opinions: 95,
   },
 ];
 
@@ -72,7 +90,7 @@ export default function ImageSlider() {
               alt={product.alt}
               header={product.header}
               price={product.price}
-              discount={product.discount}
+              priceAfterDiscount={product.priceAfterDiscount}
               stars={product.stars}
               opinions={product.opinions}
             />

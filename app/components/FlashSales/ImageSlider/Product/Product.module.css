@@ -47,7 +47,6 @@
 }
 
 .addToCart {
-  visibility: hidden;
   position: absolute;
   bottom: 0;
 
@@ -64,10 +63,13 @@
   font-weight: 600;
 
   cursor: pointer;
+
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
 }
 
 .addToCart.open {
-  visibility: visible;
+  opacity: 1;
 }
 
 .info {
@@ -85,7 +87,7 @@
   font-weight: 650;
 }
 
-.discount {
+.priceAfterDiscount {
   color: #db4444;
 }
 

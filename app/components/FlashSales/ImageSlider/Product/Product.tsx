@@ -6,7 +6,7 @@ export default function Product({
   alt,
   header,
   price,
-  discount,
+  priceAfterDiscount,
   stars,
   opinions,
 }: {
@@ -14,7 +14,7 @@ export default function Product({
   alt: string;
   header: string;
   price: number;
-  discount: number;
+  priceAfterDiscount: number;
   stars: number;
   opinions: number;
 }) {
@@ -55,7 +55,7 @@ export default function Product({
         <div className={styles.imgActionsWrapper}>
           <img src={`/img/flashsales/${url}`} alt={alt} />
           <div className={styles.percentages}>
-            -{Math.floor((1 - discount / price) * 100)}%
+            -{Math.floor((1 - priceAfterDiscount / price) * 100)}%
           </div>
           <img
             src='./img/flashsales/like.png'
@@ -75,7 +75,9 @@ export default function Product({
         <div className={styles.info}>
           <h3>{header}</h3>
           <div className={styles.prices}>
-            <span className={styles.discount}>${discount}</span>
+            <span className={styles.priceAfterDiscount}>
+              ${priceAfterDiscount}
+            </span>
             <span className={styles.price}>${price}</span>
           </div>
           <div className={styles.reviews}>
