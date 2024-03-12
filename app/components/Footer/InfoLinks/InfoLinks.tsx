@@ -1,10 +1,13 @@
 import styles from "./InfoLinks.module.css";
+import Link from "next/link";
 
 export default function InfoLinks() {
   return (
     <div className={styles.infoLinks}>
       <div className={styles.subsection}>
-        <h3 className={styles.logo}>Exclusive</h3>
+        <h3 className={styles.logo}>
+          <Link href='/'>Exclusive</Link>
+        </h3>
         <div className={styles.infoWrapper}>
           <div>Subscribe</div>
           <div className={styles.subscribeToGetPromotionWrapper}>
@@ -29,8 +32,8 @@ export default function InfoLinks() {
         <div className={styles.infoWrapper}>
           <div>My Account</div>
           <div>Login / Register</div>
-          <div>Cart</div>
-          <div>Wishlist</div>
+          <Link href='/cart'>Cart</Link>
+          <Link href='/wishlist'>Wishlist</Link>
           <div>Shop</div>
         </div>
       </div>
@@ -40,7 +43,7 @@ export default function InfoLinks() {
           <div>Privacy Policy</div>
           <div>Terms Of Use</div>
           <div>FAQ</div>
-          <div>Contact</div>
+          <Link href='/contact'>Contact</Link>
         </div>
       </div>
       <div className={styles.subsection}>

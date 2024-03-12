@@ -1,0 +1,5 @@
+.wishlist {
+  max-width: var(--max-width);
+  padding: 0rem var(--padding);
+  margin: 0 auto;
+}

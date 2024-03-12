@@ -19,8 +19,12 @@ export default function Navbar() {
           <input type='text' placeholder='What are you looking for?' />
           <img src='./img/navbar/search.png' alt='search' />
         </div>
-        <img src='./img/navbar/heart.png' alt='heart' />
-        <img src='./img/navbar/cart.png' alt='cart' />
+        <Link href='/wishlist'>
+          <img src='./img/navbar/heart.png' alt='heart' />
+        </Link>
+        <Link href='/cart'>
+          <img src='./img/navbar/cart.png' alt='cart' />
+        </Link>
       </div>
     </div>
   );
