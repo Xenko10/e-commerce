@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CarouselProvider,
   Slider,
@@ -13,6 +13,7 @@ import Product from "./Product/Product";
 import styles from "./ImageSlider.module.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useMediaQuery } from "react-responsive";
 
 const products = [
   {
@@ -72,6 +73,24 @@ const products = [
 ];
 
 export default function ImageSlider() {
+  const [slides, setSlides] = useState(1);
+
+  const isMediumScreen = useMediaQuery({ query: "(max-width: 1400px)" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 1100px)" });
+  const isSmartphone = useMediaQuery({ query: "(max-width: 600px)" });
+
+  useEffect(() => {
+    if (isSmartphone) {
+      setSlides(1);
+    } else if (isSmallScreen) {
+      setSlides(2);
+    } else if (isMediumScreen) {
+      setSlides(3);
+    } else {
+      setSlides(4);
+    }
+  }, [isMediumScreen, isSmallScreen, isSmartphone]);
+
   return (
     <CarouselProvider
       naturalSlideWidth={270}
@@ -79,7 +98,7 @@ export default function ImageSlider() {
       totalSlides={products.length}
       infinite={true}
       isPlaying={true}
-      visibleSlides={3}
+      visibleSlides={slides}
       className={styles.sliderWrapper}>
       <Slider>
         {products.map((product, index) => (

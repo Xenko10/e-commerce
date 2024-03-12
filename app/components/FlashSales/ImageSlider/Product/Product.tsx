@@ -23,7 +23,7 @@ export default function Product({
     const halfFilledStar = stars - filledStars === 0.5;
     return (
       <>
-        {Array.from({ length: 5 }, (_, index) => (
+        {Array.from(Array(5), (_, index) => (
           <img
             key={index}
             src={`/img/flashsales/${
