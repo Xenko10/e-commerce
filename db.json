@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "url": "gamepad.png",
       "header": "HAVIT HV-G92 Gamepad",
       "price": 160,
@@ -10,7 +10,7 @@
       "opinions": 88
     },
     {
-      "id": 2,
+      "id": "2",
       "url": "keyboard.png",
       "alt": "keyboard",
       "header": "AK-900 Wired Keyboard",
@@ -20,7 +20,7 @@
       "opinions": 75
     },
     {
-      "id": 3,
+      "id": "3",
       "url": "monitor.png",
       "alt": "monitor",
       "header": "IPS LCD Gaming Monitor",
@@ -30,7 +30,7 @@
       "opinions": 121
     },
     {
-      "id": 4,
+      "id": "4",
       "url": "chair.png",
       "alt": "chair",
       "header": "S-Series Comfort Chair",
@@ -40,7 +40,7 @@
       "opinions": 99
     },
     {
-      "id": 5,
+      "id": "5",
       "url": "laptop.png",
       "alt": "laptop",
       "header": "ASUS FHD Gaming Laptop",
@@ -50,7 +50,7 @@
       "opinions": 325
     },
     {
-      "id": 6,
+      "id": "6",
       "url": "camera.png",
       "alt": "camera",
       "header": "CANON EOS DSLR Camera",

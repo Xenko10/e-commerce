@@ -2,6 +2,7 @@ import styles from "./Product.module.css";
 import { useState } from "react";
 
 export default function Product({
+  id,
   url,
   alt,
   header,
@@ -9,7 +10,11 @@ export default function Product({
   priceAfterDiscount,
   stars,
   opinions,
+  addToCart,
+  deleteFromCart,
+  isUpdating,
 }: {
+  id: number;
   url: string;
   alt: string;
   header: string;
@@ -17,6 +22,9 @@ export default function Product({
   priceAfterDiscount: number;
   stars: number;
   opinions: number;
+  addToCart: (id: number) => void;
+  deleteFromCart: (id: number) => void;
+  isUpdating: boolean;
 }) {
   function renderStars() {
     const filledStars = Math.floor(stars);
@@ -45,6 +53,15 @@ export default function Product({
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
   let cartStroke = isAddedToCart ? "white" : "black";
+
+  function handleAddToCart() {
+    if (isAddedToCart === false && isUpdating === false) {
+      addToCart(id);
+    } else if (isAddedToCart === true && isUpdating === false) {
+      deleteFromCart(id);
+    }
+    setIsAddedToCart(!isAddedToCart);
+  }
 
   return (
     <div className={styles.productWrapper}>
@@ -86,7 +103,7 @@ export default function Product({
               isAddedToCart ? `${styles.cart} ${styles.clicked}` : styles.cart
             }
             onClick={() => {
-              setIsAddedToCart(!isAddedToCart);
+              handleAddToCart();
             }}>
             <svg
               width='24'
@@ -127,9 +144,9 @@ export default function Product({
           <div
             className={`${styles.addToCart} ${isMouseOver ? styles.open : ""}`}
             onClick={() => {
-              setIsAddedToCart(!isAddedToCart);
+              handleAddToCart();
             }}>
-            Add to Cart
+            {isAddedToCart ? "Remove from cart" : "Add to cart"}
           </div>
         </div>
         <div className={styles.info}>

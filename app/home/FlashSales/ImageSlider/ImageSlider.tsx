@@ -16,7 +16,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
 import axios from "axios";
 
-type Product = {
+type ProductDataType = {
+  id: number;
   url: string;
   alt: string;
   header: string;
@@ -45,7 +46,10 @@ export default function ImageSlider() {
     }
   }, [isMediumScreen, isSmallScreen, isSmartphone]);
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductDataType[]>([]);
+  const [cart, setCart] = useState<{ id: number }[]>([]);
+  const [isUpdating, setIsUpdating] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       await axios.get("http://localhost:3001/products").then((response) => {
@@ -55,6 +59,53 @@ export default function ImageSlider() {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios.get("http://localhost:3001/cart").then((response) => {
+        const data = response.data;
+        setCart(data);
+      });
+    };
+    fetchData();
+  }, []);
+
+  function addToCart(product: { id: number }) {
+    try {
+      const isInCart = cart?.find((item) => {
+        return item.id === product.id;
+      });
+      if (!isInCart && isUpdating === false) {
+        setIsUpdating(true);
+        axios
+          .post("http://localhost:3001/cart", { id: product.id })
+          .then((response) => {
+            setCart((prevCart) => [...prevCart, response.data]);
+            setIsUpdating(false);
+          });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function deleteFromCart(product: { id: number }) {
+    try {
+      if (isUpdating === false) {
+        setIsUpdating(true);
+        axios.delete(`http://localhost:3001/cart/${product.id}`).then(() => {
+          setCart((prevCart) => {
+            return prevCart.filter((item) => {
+              return item.id !== product.id;
+            });
+          });
+          setIsUpdating(false);
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <CarouselProvider
@@ -67,9 +118,10 @@ export default function ImageSlider() {
       className={styles.sliderWrapper}
       dragEnabled={false}>
       <Slider>
-        {products.map((product: Product, index: number) => (
-          <Slide index={index} key={product.header} className={styles.slide}>
+        {products.map((product: ProductDataType) => (
+          <Slide index={product.id} key={product.id} className={styles.slide}>
             <Product
+              id={product.id}
               key={product.header}
               url={product.url}
               alt={product.alt}
@@ -78,6 +130,9 @@ export default function ImageSlider() {
               priceAfterDiscount={product.priceAfterDiscount}
               stars={product.stars}
               opinions={product.opinions}
+              addToCart={(id: number) => addToCart({ id })}
+              deleteFromCart={(id: number) => deleteFromCart({ id })}
+              isUpdating={isUpdating}
             />
           </Slide>
         ))}
