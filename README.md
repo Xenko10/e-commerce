@@ -1,3 +1,16 @@
+## How to run this project?
+
+1. Common setup. Clon the repository and install the dependencies.
+
+- git clone https://github.com/Xenko10/e-commerce.git
+- cd e-commerce
+- npm install
+
+2. Run the following.
+
+- start start.bat
+- open localhost:3000
+
 ## Credits
 
 Figma design link:

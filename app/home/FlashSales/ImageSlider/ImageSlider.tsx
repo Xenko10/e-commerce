@@ -48,7 +48,7 @@ export default function ImageSlider() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get("http://localhost:3000/products").then((response) => {
+      await axios.get("http://localhost:3001/products").then((response) => {
         const data = response.data;
         setProducts(data);
       });
