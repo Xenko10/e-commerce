@@ -14,63 +14,17 @@ import styles from "./ImageSlider.module.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
+import axios from "axios";
 
-const products = [
-  {
-    url: "gamepad.png",
-    alt: "gamepad",
-    header: "HAVIT HV-G92 Gamepad",
-    price: 160,
-    priceAfterDiscount: 120,
-    stars: 4.5,
-    opinions: 88,
-  },
-  {
-    url: "keyboard.png",
-    alt: "keyboard",
-    header: "AK-900 Wired Keyboard",
-    price: 1160,
-    priceAfterDiscount: 920,
-    stars: 4,
-    opinions: 75,
-  },
-  {
-    url: "monitor.png",
-    alt: "monitor",
-    header: "IPS LCD Gaming Monitor",
-    price: 400,
-    priceAfterDiscount: 240,
-    stars: 5,
-    opinions: 121,
-  },
-  {
-    url: "chair.png",
-    alt: "chair",
-    header: "S-Series Comfort Chair",
-    price: 400,
-    priceAfterDiscount: 160,
-    stars: 3.5,
-    opinions: 99,
-  },
-  {
-    url: "laptop.png",
-    alt: "laptop",
-    header: "ASUS FHD Gaming Laptop",
-    price: 700,
-    priceAfterDiscount: 525,
-    stars: 5,
-    opinions: 325,
-  },
-  {
-    url: "camera.png",
-    alt: "camera",
-    header: "CANON EOS DSLR Camera",
-    price: 360,
-    priceAfterDiscount: 270,
-    stars: 4,
-    opinions: 95,
-  },
-];
+type Product = {
+  url: string;
+  alt: string;
+  header: string;
+  price: number;
+  priceAfterDiscount: number;
+  stars: number;
+  opinions: number;
+};
 
 export default function ImageSlider() {
   const [slides, setSlides] = useState(1);
@@ -91,6 +45,17 @@ export default function ImageSlider() {
     }
   }, [isMediumScreen, isSmallScreen, isSmartphone]);
 
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios.get("http://localhost:3000/products").then((response) => {
+        const data = response.data;
+        setProducts(data);
+      });
+    };
+    fetchData();
+  }, []);
+
   return (
     <CarouselProvider
       naturalSlideWidth={270}
@@ -102,7 +67,7 @@ export default function ImageSlider() {
       className={styles.sliderWrapper}
       dragEnabled={false}>
       <Slider>
-        {products.map((product, index) => (
+        {products.map((product: Product, index: number) => (
           <Slide index={index} key={product.header} className={styles.slide}>
             <Product
               key={product.header}
