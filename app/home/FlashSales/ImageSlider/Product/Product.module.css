@@ -38,6 +38,7 @@
   cursor: pointer;
 
   display: flex;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .cart {
@@ -52,6 +53,7 @@
   cursor: pointer;
 
   display: flex;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .clicked {
