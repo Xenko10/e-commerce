@@ -190,6 +190,8 @@ export default function ImageSlider() {
               addToWishlist={(id: number) => addToWishlist({ id })}
               deleteFromWishlist={(id: number) => deleteFromWishlist({ id })}
               isWishlistUpdating={isWishlistUpdating}
+              cart={cart}
+              wishlist={wishlist}
             />
           </Slide>
         ))}

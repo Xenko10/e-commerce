@@ -1,7 +1,7 @@
 import styles from "./Product.module.css";
 import Cart from "./Actions/Cart";
 import Wishlist from "./Actions/Wishlist";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type ProductWithFunctions = {
   id: number;
@@ -18,6 +18,8 @@ type ProductWithFunctions = {
   addToWishlist: (id: number) => void;
   deleteFromWishlist: (id: number) => void;
   isWishlistUpdating: boolean;
+  cart: { id: number }[];
+  wishlist: { id: number }[];
 };
 
 export default function Product({
@@ -35,6 +37,8 @@ export default function Product({
   addToWishlist,
   deleteFromWishlist,
   isWishlistUpdating,
+  cart,
+  wishlist,
 }: ProductWithFunctions) {
   function renderStars() {
     const filledStars = Math.floor(stars);
@@ -67,23 +71,35 @@ export default function Product({
 
   function handleAddToCart() {
     if (isAddedToCart === false && isCartUpdating === false) {
+      setIsAddedToCart(true);
       addToCart(id);
-      setIsAddedToCart(!isAddedToCart);
     } else if (isAddedToCart === true && isCartUpdating === false) {
+      setIsAddedToCart(false);
       deleteFromCart(id);
-      setIsAddedToCart(!isAddedToCart);
     }
   }
 
   function handleAddToWishlist() {
     if (isAddedToWishlist === false && isWishlistUpdating === false) {
+      setIsAddedToWishlist(true);
       addToWishlist(id);
-      setIsAddedToWishlist(!isAddedToWishlist);
     } else if (isAddedToWishlist === true && isWishlistUpdating === false) {
+      setIsAddedToWishlist(false);
       deleteFromWishlist(id);
-      setIsAddedToWishlist(!isAddedToWishlist);
     }
   }
+
+  useEffect(() => {
+    if (isCartUpdating === false && cart.some((item) => item.id === id)) {
+      setIsAddedToCart(true);
+    }
+    if (
+      isWishlistUpdating === false &&
+      wishlist.some((item) => item.id === id)
+    ) {
+      setIsAddedToWishlist(true);
+    }
+  }, [cart, wishlist]);
 
   return (
     <div className={styles.productWrapper}>
