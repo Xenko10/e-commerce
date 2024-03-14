@@ -15,6 +15,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
 import axios from "axios";
+import { API_URL } from "../../../../constant";
 
 type ProductDataType = {
   id: number;
@@ -52,7 +53,7 @@ export default function ImageSlider() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get("http://localhost:3001/products").then((response) => {
+      await axios.get(`${API_URL}/products`).then((response) => {
         const data = response.data;
         setProducts(data);
       });
@@ -62,7 +63,7 @@ export default function ImageSlider() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get("http://localhost:3001/cart").then((response) => {
+      await axios.get(`${API_URL}/cart`).then((response) => {
         const data = response.data;
         setCart(data);
       });
