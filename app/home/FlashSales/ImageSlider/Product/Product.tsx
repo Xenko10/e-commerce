@@ -14,7 +14,10 @@ type ProductWithFunctions = {
   opinions: number;
   addToCart: (id: number) => void;
   deleteFromCart: (id: number) => void;
-  isUpdating: boolean;
+  isCartUpdating: boolean;
+  addToWishlist: (id: number) => void;
+  deleteFromWishlist: (id: number) => void;
+  isWishlistUpdating: boolean;
 };
 
 export default function Product({
@@ -28,7 +31,10 @@ export default function Product({
   opinions,
   addToCart,
   deleteFromCart,
-  isUpdating,
+  isCartUpdating,
+  addToWishlist,
+  deleteFromWishlist,
+  isWishlistUpdating,
 }: ProductWithFunctions) {
   function renderStars() {
     const filledStars = Math.floor(stars);
@@ -53,19 +59,29 @@ export default function Product({
   }
 
   const [isMouseOver, setIsMouseOver] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
-  let wishlistStroke = isLiked ? "white" : "black";
+  let wishlistStroke = isAddedToWishlist ? "white" : "black";
   let cartStroke = isAddedToCart ? "white" : "black";
 
   function handleAddToCart() {
-    if (isAddedToCart === false && isUpdating === false) {
+    if (isAddedToCart === false && isCartUpdating === false) {
       addToCart(id);
       setIsAddedToCart(!isAddedToCart);
-    } else if (isAddedToCart === true && isUpdating === false) {
+    } else if (isAddedToCart === true && isCartUpdating === false) {
       deleteFromCart(id);
       setIsAddedToCart(!isAddedToCart);
+    }
+  }
+
+  function handleAddToWishlist() {
+    if (isAddedToWishlist === false && isWishlistUpdating === false) {
+      addToWishlist(id);
+      setIsAddedToWishlist(!isAddedToWishlist);
+    } else if (isAddedToWishlist === true && isWishlistUpdating === false) {
+      deleteFromWishlist(id);
+      setIsAddedToWishlist(!isAddedToWishlist);
     }
   }
 
@@ -86,9 +102,11 @@ export default function Product({
           </div>
           <div
             className={
-              isLiked ? `${styles.wishlist} ${styles.clicked}` : styles.wishlist
+              isAddedToWishlist
+                ? `${styles.wishlist} ${styles.clicked}`
+                : styles.wishlist
             }
-            onClick={() => setIsLiked(!isLiked)}>
+            onClick={() => handleAddToWishlist()}>
             <Wishlist wishlistStroke={wishlistStroke} />
           </div>
           <div

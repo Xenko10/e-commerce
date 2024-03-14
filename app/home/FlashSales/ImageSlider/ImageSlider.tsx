@@ -48,8 +48,12 @@ export default function ImageSlider() {
   }, [isMediumScreen, isSmallScreen, isSmartphone]);
 
   const [products, setProducts] = useState<ProductDataType[]>([]);
+
   const [cart, setCart] = useState<{ id: number }[]>([]);
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [isCartUpdating, setIsCartUpdating] = useState(false);
+
+  const [wishlist, setWishlist] = useState<{ id: number }[]>([]);
+  const [isWishlistUpdating, setIsWishlistUpdating] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,18 +75,28 @@ export default function ImageSlider() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios.get(`${API_URL}/wishlist`).then((response) => {
+        const data = response.data;
+        setWishlist(data);
+      });
+    };
+    fetchData();
+  }, []);
+
   function addToCart(product: { id: number }) {
     try {
       const isInCart = cart?.find((item) => {
         return item.id === product.id;
       });
-      if (!isInCart && isUpdating === false) {
-        setIsUpdating(true);
+      if (!isInCart && isCartUpdating === false) {
+        setIsCartUpdating(true);
         axios
           .post("http://localhost:3001/cart", { id: product.id })
           .then((response) => {
             setCart((prevCart) => [...prevCart, response.data]);
-            setIsUpdating(false);
+            setIsCartUpdating(false);
           });
       }
     } catch (error) {
@@ -92,16 +106,55 @@ export default function ImageSlider() {
 
   function deleteFromCart(product: { id: number }) {
     try {
-      if (isUpdating === false) {
-        setIsUpdating(true);
+      if (isCartUpdating === false) {
+        setIsCartUpdating(true);
         axios.delete(`http://localhost:3001/cart/${product.id}`).then(() => {
           setCart((prevCart) => {
             return prevCart.filter((item) => {
               return item.id !== product.id;
             });
           });
-          setIsUpdating(false);
+          setIsCartUpdating(false);
         });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function addToWishlist(product: { id: number }) {
+    try {
+      const isInWishlist = wishlist?.find((item) => {
+        return item.id === product.id;
+      });
+      if (!isInWishlist && isWishlistUpdating === false) {
+        setIsWishlistUpdating(true);
+        axios
+          .post("http://localhost:3001/wishlist", { id: product.id })
+          .then((response) => {
+            setWishlist((prevWishlist) => [...prevWishlist, response.data]);
+            setIsWishlistUpdating(false);
+          });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function deleteFromWishlist(product: { id: number }) {
+    try {
+      if (isWishlistUpdating === false) {
+        setIsWishlistUpdating(true);
+        axios
+          .delete(`http://localhost:3001/wishlist/${product.id}`)
+          .then(() => {
+            setWishlist((prevWishlist) => {
+              return prevWishlist.filter((item) => {
+                return item.id !== product.id;
+              });
+            });
+            setIsWishlistUpdating(false);
+          });
       }
     } catch (error) {
       console.error(error);
@@ -133,7 +186,10 @@ export default function ImageSlider() {
               opinions={product.opinions}
               addToCart={(id: number) => addToCart({ id })}
               deleteFromCart={(id: number) => deleteFromCart({ id })}
-              isUpdating={isUpdating}
+              isCartUpdating={isCartUpdating}
+              addToWishlist={(id: number) => addToWishlist({ id })}
+              deleteFromWishlist={(id: number) => deleteFromWishlist({ id })}
+              isWishlistUpdating={isWishlistUpdating}
             />
           </Slide>
         ))}
