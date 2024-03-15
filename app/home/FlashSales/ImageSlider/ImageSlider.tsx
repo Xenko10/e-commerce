@@ -9,7 +9,7 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import Product from "./Product/Product";
+import Product from "../../../components/Product/Product";
 import styles from "./ImageSlider.module.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";

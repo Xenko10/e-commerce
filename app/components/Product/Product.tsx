@@ -113,9 +113,12 @@ export default function Product({
         }}>
         <div className={styles.imgActionsWrapper}>
           <img src={`/img/flashsales/${url}`} alt={alt} />
-          <div className={styles.percentages}>
-            -{Math.floor((1 - priceAfterDiscount / price) * 100)}%
-          </div>
+
+          {priceAfterDiscount ? (
+            <div className={styles.percentages}>
+              -{Math.floor((1 - priceAfterDiscount / price) * 100)}%
+            </div>
+          ) : null}
           <div
             className={
               isAddedToWishlist
