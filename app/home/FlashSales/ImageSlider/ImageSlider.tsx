@@ -92,12 +92,10 @@ export default function ImageSlider() {
       });
       if (!isInCart && isCartUpdating === false) {
         setIsCartUpdating(true);
-        axios
-          .post("http://localhost:3001/cart", { id: product.id })
-          .then((response) => {
-            setCart((prevCart) => [...prevCart, response.data]);
-            setIsCartUpdating(false);
-          });
+        axios.post(`${API_URL}/cart`, { id: product.id }).then((response) => {
+          setCart((prevCart) => [...prevCart, response.data]);
+          setIsCartUpdating(false);
+        });
       }
     } catch (error) {
       console.error(error);
@@ -108,7 +106,7 @@ export default function ImageSlider() {
     try {
       if (isCartUpdating === false) {
         setIsCartUpdating(true);
-        axios.delete(`http://localhost:3001/cart/${product.id}`).then(() => {
+        axios.delete(`${API_URL}/cart/${product.id}`).then(() => {
           setCart((prevCart) => {
             return prevCart.filter((item) => {
               return item.id !== product.id;
@@ -130,7 +128,7 @@ export default function ImageSlider() {
       if (!isInWishlist && isWishlistUpdating === false) {
         setIsWishlistUpdating(true);
         axios
-          .post("http://localhost:3001/wishlist", { id: product.id })
+          .post(`${API_URL}/wishlist`, { id: product.id })
           .then((response) => {
             setWishlist((prevWishlist) => [...prevWishlist, response.data]);
             setIsWishlistUpdating(false);
@@ -145,16 +143,14 @@ export default function ImageSlider() {
     try {
       if (isWishlistUpdating === false) {
         setIsWishlistUpdating(true);
-        axios
-          .delete(`http://localhost:3001/wishlist/${product.id}`)
-          .then(() => {
-            setWishlist((prevWishlist) => {
-              return prevWishlist.filter((item) => {
-                return item.id !== product.id;
-              });
+        axios.delete(`${API_URL}/wishlist/${product.id}`).then(() => {
+          setWishlist((prevWishlist) => {
+            return prevWishlist.filter((item) => {
+              return item.id !== product.id;
             });
-            setIsWishlistUpdating(false);
           });
+          setIsWishlistUpdating(false);
+        });
       }
     } catch (error) {
       console.error(error);
