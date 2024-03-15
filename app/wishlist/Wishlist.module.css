@@ -3,3 +3,8 @@
   padding: 0rem var(--padding);
   margin: 0 auto;
 }
+
+.header {
+  font-weight: 500;
+  font-size: 1.25rem;
+}
