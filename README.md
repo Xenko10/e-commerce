@@ -1,8 +1,12 @@
 ## Preview
 
+### Home
+
+![Home](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/home.png)
+
 ### Flash Sales
 
-![Flash](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/flashsales.gif)
+![Flash Sales](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/flashsales.gif)
 
 ## How to run this project?
 
