@@ -1,4 +1,8 @@
 .navbar {
+  border-bottom: 1px solid #c0bebe;
+}
+
+.logoActionsWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,7 +10,6 @@
   max-width: var(--max-width);
   padding: 2rem var(--padding) 1.25rem var(--padding);
   margin: 0 auto;
-  border-bottom: 1px solid #c0bebe;
 }
 
 .logo {
@@ -38,7 +41,7 @@
   text-decoration: underline;
 }
 
-.navbar > button {
+.logoActionsWrapper > button {
   display: none;
 
   background-color: transparent;
@@ -53,7 +56,7 @@
   .menu {
     display: none;
   }
-  .navbar > button {
+  .logoActionsWrapper > button {
     display: block;
   }
 }
