@@ -8,27 +8,27 @@
 
 ### Home
 
-![Home](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/home.png)
+![Home](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/home.png)
 
 ### Flash Sales
 
-![Flash Sales](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/flashsales.gif)
+![Flash Sales](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/flashsales.gif)
 
 ### Product
 
-![Product](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/product.png)
+![Product](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/product.png)
 
 ### Wishlist
 
-![Wishlist](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/wishlist.png)
+![Wishlist](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/wishlist.png)
 
 ### Cart
 
-![Cart](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/cart.png)
+![Cart](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/cart.png)
 
 ### Footer
 
-![Footer](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/footer.png)
+![Footer](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/footer.png)
 
 ## How to run this project?
 
