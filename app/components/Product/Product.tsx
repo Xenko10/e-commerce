@@ -5,7 +5,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../constant";
 
-type ProductWithFunctions = {
+type Id = { id: number };
+type SetStateFunction = React.Dispatch<React.SetStateAction<Id[]>>;
+
+type ProductProps = {
   id: number;
   url: string;
   alt: string;
@@ -14,22 +17,10 @@ type ProductWithFunctions = {
   priceAfterDiscount: number;
   stars: number;
   opinions: number;
-  cart: { id: number }[];
-  setCart: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-      }[]
-    >
-  >;
-  wishlist: { id: number }[];
-  setWishlist: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-      }[]
-    >
-  >;
+  cart: Id[];
+  setCart: SetStateFunction;
+  wishlist: Id[];
+  setWishlist: SetStateFunction;
 };
 
 export default function Product({
@@ -45,7 +36,7 @@ export default function Product({
   setCart,
   wishlist,
   setWishlist,
-}: ProductWithFunctions) {
+}: ProductProps) {
   const [isCartUpdating, setIsCartUpdating] = useState(false);
   const [isWishlistUpdating, setIsWishlistUpdating] = useState(false);
 
@@ -68,7 +59,7 @@ export default function Product({
 
   function deleteFromCart(product: { id: number }) {
     try {
-      if (isCartUpdating === false) {
+      if (!isCartUpdating) {
         setIsCartUpdating(true);
         axios.delete(`${API_URL}/cart/${product.id}`).then(() => {
           setCart((prevCart) => {
@@ -216,7 +207,9 @@ export default function Product({
             <Cart cartStroke={cartStroke} />
           </div>
           <div
-            className={`${styles.addToCart} ${isMouseOver ? styles.open : ""}`}
+            className={`${styles.addToCart} ${
+              isMouseOver ? styles.open : null
+            }`}
             onClick={() => {
               handleAddToCart();
             }}>

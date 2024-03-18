@@ -34,7 +34,6 @@ export default function Cart() {
       const productData = productDataResponses.map((response) => response.data);
       setProducts(productData);
     };
-
     fetchData();
   }, []);
 

@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-.content {
+.contentWrapper {
   max-width: var(--max-width);
   padding: 0.75rem var(--padding);
   margin: 0 auto;

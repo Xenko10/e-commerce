@@ -2,6 +2,11 @@
   border-bottom: 1px solid #c0bebe;
 }
 
+.navbar a {
+  text-decoration: none;
+  color: black;
+}
+
 .logoActionsWrapper {
   display: flex;
   justify-content: space-between;
@@ -17,11 +22,6 @@
   font-weight: 700;
 }
 
-.logo > a {
-  text-decoration: none;
-  color: black;
-}
-
 .menu {
   display: flex;
   justify-content: space-between;
@@ -30,8 +30,6 @@
 }
 
 .menu > a {
-  text-decoration: none;
-  color: black;
   text-align: center;
   min-width: 60px;
   height: 20px;

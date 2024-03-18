@@ -30,13 +30,10 @@ export default function Wishlist() {
       const productDataPromises = wishlistData.map((item: { id: number }) =>
         axios.get(`${API_URL}/products/${item.id}`)
       );
-
       const productDataResponses = await Promise.all(productDataPromises);
       const productData = productDataResponses.map((response) => response.data);
-
       setProducts(productData);
     };
-
     fetchData();
   }, []);
 

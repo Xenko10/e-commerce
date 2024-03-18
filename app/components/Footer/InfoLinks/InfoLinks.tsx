@@ -14,7 +14,7 @@ export default function InfoLinks() {
             <div>Get 10% off your first order</div>
             <div className={styles.email}>
               <input type='text' placeholder='Enter your email' />
-              <img src='./img/footer/send.png' alt='send' />
+              <img src='./img/footer/send.png' alt='Send' />
             </div>
           </div>
         </div>
@@ -22,7 +22,10 @@ export default function InfoLinks() {
       <div className={styles.subsection}>
         <h3 className={styles.itemHeader}>Support</h3>
         <div className={styles.infoWrapper}>
-          <div>Plac Tadeusza Kościuszki 45, 22-460 Szczebrzeszyn</div>
+          <div>
+            Plac Tadeusza Kościuszki 45, <br />
+            22-460 Szczebrzeszyn
+          </div>
           <div>exclusive@gmail.com</div>
           <div>+688 987 654 321</div>
         </div>
@@ -53,7 +56,7 @@ export default function InfoLinks() {
           <div className={styles.imgWrapper}>
             <img
               src='./img/footer/qr_code.png'
-              alt='github.com/Xenko10'
+              alt='QR code'
               className={styles.qrCode}
             />
             <img
@@ -68,10 +71,10 @@ export default function InfoLinks() {
             />
           </div>
           <div className={styles.socialsWrapper}>
-            <img src='./img/footer/facebook.png' alt='facebook' />
-            <img src='./img/footer/twitter.png' alt='twitter' />
-            <img src='./img/footer/instagram.png' alt='instagram' />
-            <img src='./img/footer/linkedin.png' alt='linkedin' />
+            <img src='./img/footer/facebook.png' alt='Facebook' />
+            <img src='./img/footer/twitter.png' alt='Twitter' />
+            <img src='./img/footer/instagram.png' alt='Instagram' />
+            <img src='./img/footer/linkedin.png' alt='Linkedin' />
           </div>
         </div>
       </div>

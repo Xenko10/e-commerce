@@ -10,21 +10,21 @@ export default function Navbar() {
         </div>
         <div className={styles.menu}>
           <Link href='/'>Home</Link>
-          <a href='/contact'>Contact</a>
-          <a href='/about'>About</a>
-          <a href='/signup'>Sign Up</a>
+          <Link href='/contact'>Contact</Link>
+          <Link href='/about'>About</Link>
+          <Link href='/signup'>Sign Up</Link>
         </div>
         <button>☰</button>
         <div className={styles.actions}>
           <div className={styles.search}>
             <input type='text' placeholder='What are you looking for?' />
-            <img src='./img/navbar/search.png' alt='search' />
+            <img src='./img/navbar/search.png' alt='Search' />
           </div>
           <Link href='/wishlist'>
-            <img src='./img/navbar/heart.png' alt='heart' />
+            <img src='./img/navbar/heart.png' alt='Wishlist' />
           </Link>
           <Link href='/cart'>
-            <img src='./img/navbar/cart.png' alt='cart' />
+            <img src='./img/navbar/cart.png' alt='Cart' />
           </Link>
         </div>
       </div>

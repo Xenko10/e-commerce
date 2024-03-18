@@ -7,7 +7,7 @@
 }
 
 @media (max-width: 950px) {
-  .hero {
+  .contentWrapper {
     flex-direction: column-reverse;
     max-width: 100%;
     padding: 0;

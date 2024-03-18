@@ -6,7 +6,7 @@ export default function MessageOfTheDay() {
       <div className={styles.message}>
         <img
           src='./img/hero/iphone14.png'
-          alt='iphone14 up to 10% off voucher'
+          alt='Iphone14 up to 10% off voucher'
         />
       </div>
     </div>

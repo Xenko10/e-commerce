@@ -48,11 +48,6 @@ export default function ImageSlider() {
   }, [isMediumScreen, isSmallScreen, isSmartphone]);
 
   const [products, setProducts] = useState<ProductDataType[]>([]);
-
-  const [cart, setCart] = useState<{ id: number }[]>([]);
-
-  const [wishlist, setWishlist] = useState<{ id: number }[]>([]);
-
   useEffect(() => {
     const fetchData = async () => {
       await axios.get(`${API_URL}/products`).then((response) => {
@@ -63,6 +58,7 @@ export default function ImageSlider() {
     fetchData();
   }, []);
 
+  const [cart, setCart] = useState<{ id: number }[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       await axios.get(`${API_URL}/cart`).then((response) => {
@@ -73,6 +69,7 @@ export default function ImageSlider() {
     fetchData();
   }, []);
 
+  const [wishlist, setWishlist] = useState<{ id: number }[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       await axios.get(`${API_URL}/wishlist`).then((response) => {
@@ -85,13 +82,13 @@ export default function ImageSlider() {
 
   return (
     <CarouselProvider
+      className={styles.sliderWrapper}
       naturalSlideWidth={270}
       naturalSlideHeight={340}
       totalSlides={products.length}
       infinite={true}
       isPlaying={true}
       visibleSlides={slides}
-      className={styles.sliderWrapper}
       dragEnabled={false}>
       <Slider>
         {products.map((product: ProductDataType) => (
