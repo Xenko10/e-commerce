@@ -2,6 +2,8 @@ import styles from "./Product.module.css";
 import Cart from "./Actions/Cart";
 import Wishlist from "./Actions/Wishlist";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { API_URL } from "../../../constant";
 
 type ProductWithFunctions = {
   id: number;
@@ -12,14 +14,22 @@ type ProductWithFunctions = {
   priceAfterDiscount: number;
   stars: number;
   opinions: number;
-  addToCart: (id: number) => void;
-  deleteFromCart: (id: number) => void;
-  isCartUpdating: boolean;
-  addToWishlist: (id: number) => void;
-  deleteFromWishlist: (id: number) => void;
-  isWishlistUpdating: boolean;
   cart: { id: number }[];
+  setCart: React.Dispatch<
+    React.SetStateAction<
+      {
+        id: number;
+      }[]
+    >
+  >;
   wishlist: { id: number }[];
+  setWishlist: React.Dispatch<
+    React.SetStateAction<
+      {
+        id: number;
+      }[]
+    >
+  >;
 };
 
 export default function Product({
@@ -31,15 +41,86 @@ export default function Product({
   priceAfterDiscount,
   stars,
   opinions,
-  addToCart,
-  deleteFromCart,
-  isCartUpdating,
-  addToWishlist,
-  deleteFromWishlist,
-  isWishlistUpdating,
   cart,
+  setCart,
   wishlist,
+  setWishlist,
 }: ProductWithFunctions) {
+  const [isCartUpdating, setIsCartUpdating] = useState(false);
+  const [isWishlistUpdating, setIsWishlistUpdating] = useState(false);
+
+  function addToCart(product: { id: number }) {
+    try {
+      const isInCart = cart?.find((item) => {
+        return item.id === product.id;
+      });
+      if (!isInCart && !isCartUpdating) {
+        setIsCartUpdating(true);
+        axios.post(`${API_URL}/cart`, { id: product.id }).then((response) => {
+          setCart((prevCart) => [...prevCart, response.data]);
+          setIsCartUpdating(false);
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function deleteFromCart(product: { id: number }) {
+    try {
+      if (isCartUpdating === false) {
+        setIsCartUpdating(true);
+        axios.delete(`${API_URL}/cart/${product.id}`).then(() => {
+          setCart((prevCart) => {
+            return prevCart.filter((item) => {
+              return item.id !== product.id;
+            });
+          });
+          setIsCartUpdating(false);
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function addToWishlist(product: { id: number }) {
+    try {
+      const isInWishlist = wishlist?.find((item) => {
+        return item.id === product.id;
+      });
+      if (!isInWishlist && !isWishlistUpdating) {
+        setIsWishlistUpdating(true);
+        axios
+          .post(`${API_URL}/wishlist`, { id: product.id })
+          .then((response) => {
+            setWishlist((prevWishlist) => [...prevWishlist, response.data]);
+            setIsWishlistUpdating(false);
+          });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function deleteFromWishlist(product: { id: number }) {
+    try {
+      if (!isWishlistUpdating) {
+        setIsWishlistUpdating(true);
+        axios.delete(`${API_URL}/wishlist/${product.id}`).then(() => {
+          setWishlist((prevWishlist) => {
+            return prevWishlist.filter((item) => {
+              return item.id !== product.id;
+            });
+          });
+          setIsWishlistUpdating(false);
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function renderStars() {
     const filledStars = Math.floor(stars);
     const halfFilledStar = stars - filledStars === 0.5;
@@ -70,33 +151,30 @@ export default function Product({
   let cartStroke = isAddedToCart ? "white" : "black";
 
   function handleAddToCart() {
-    if (isAddedToCart === false && isCartUpdating === false) {
+    if (!isAddedToCart && !isCartUpdating) {
       setIsAddedToCart(true);
-      addToCart(id);
-    } else if (isAddedToCart === true && isCartUpdating === false) {
+      addToCart({ id });
+    } else if (isAddedToCart && !isCartUpdating) {
       setIsAddedToCart(false);
-      deleteFromCart(id);
+      deleteFromCart({ id });
     }
   }
 
   function handleAddToWishlist() {
-    if (isAddedToWishlist === false && isWishlistUpdating === false) {
+    if (!isAddedToWishlist && !isWishlistUpdating) {
       setIsAddedToWishlist(true);
-      addToWishlist(id);
-    } else if (isAddedToWishlist === true && isWishlistUpdating === false) {
+      addToWishlist({ id });
+    } else if (isAddedToWishlist && !isWishlistUpdating) {
       setIsAddedToWishlist(false);
-      deleteFromWishlist(id);
+      deleteFromWishlist({ id });
     }
   }
 
   useEffect(() => {
-    if (isCartUpdating === false && cart.some((item) => item.id === id)) {
+    if (!isCartUpdating && cart.some((item) => item.id === id)) {
       setIsAddedToCart(true);
     }
-    if (
-      isWishlistUpdating === false &&
-      wishlist.some((item) => item.id === id)
-    ) {
+    if (!isWishlistUpdating && wishlist.some((item) => item.id === id)) {
       setIsAddedToWishlist(true);
     }
   }, [cart, wishlist]);
