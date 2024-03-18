@@ -8,6 +8,22 @@
 
 ![Flash Sales](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/flashsales.gif)
 
+### Product
+
+![Product](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/product.png)
+
+### Wishlist
+
+![Wishlist](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/wishlist.png)
+
+### Cart
+
+![Cart](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/cart.png)
+
+### Footer
+
+![Footer](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/footer.png)
+
 ## How to run this project?
 
 1. Common setup. Clon the repository and install the dependencies.
