@@ -2,7 +2,7 @@
 
 ### Flash Sales
 
-![Flash Sales](https://github.com/Xenko10/e-commerce/tree/readme/public/readme-img/flashsales.gif)
+![Flash](https://github.com/Xenko10/e-commerce/blob/readme/public/readme-img/flashsales.gif)
 
 ## How to run this project?
 
