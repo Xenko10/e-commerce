@@ -1,3 +1,9 @@
+## Preview
+
+### Flash Sales
+
+![Flash Sales](https://github.com/Xenko10/e-commerce/tree/readme/public/readme-img/flashsales.gif)
+
 ## How to run this project?
 
 1. Common setup. Clon the repository and install the dependencies.
