@@ -47,16 +47,6 @@ export default function Wishlist() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`${API_URL}/products`).then((response) => {
-        const data = response.data;
-        setProducts(data);
-      });
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
       await axios.get(`${API_URL}/cart`).then((response) => {
         const data = response.data;
         setCart(data);
