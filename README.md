@@ -1,7 +1,7 @@
 # Content
 
 - [Preview](#Preview)
-- [How to run this project?](#How-to-run-this-project?)
+- [How to run this project?](#How-to-run-this-project)
 - [Figma Design credits](#Figma-Design-credits)
 
 ## Preview
