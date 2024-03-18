@@ -1,3 +1,9 @@
+# Content
+
+- [Preview](#Preview)
+- [How to run this project?](#How-to-run-this-project?)
+- [Figma Design credits](#Figma-Design-credits)
+
 ## Preview
 
 ### Home
@@ -37,7 +43,7 @@
 - start start.bat
 - open localhost:3000
 
-## Credits
+## Figma Design credits
 
 Figma design link:
 https://www.figma.com/community/file/1219312065205187851
