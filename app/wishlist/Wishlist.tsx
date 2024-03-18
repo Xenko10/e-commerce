@@ -139,31 +139,33 @@ export default function Wishlist() {
 
   return (
     <div className={styles.wishlist}>
-      <h2 className={styles.header}>
-        Wishlist {wishlist.length !== 0 ? `(${wishlist.length})` : null}
-      </h2>
-      <div className={styles.productsWrapper}>
-        {products.map((product: ProductDataType) => (
-          <Product
-            id={product.id}
-            key={product.header}
-            url={product.url}
-            alt={product.alt}
-            header={product.header}
-            price={product.price}
-            priceAfterDiscount={product.priceAfterDiscount}
-            stars={product.stars}
-            opinions={product.opinions}
-            addToCart={(id: number) => addToCart({ id })}
-            deleteFromCart={(id: number) => deleteFromCart({ id })}
-            isCartUpdating={isCartUpdating}
-            addToWishlist={(id: number) => addToWishlist({ id })}
-            deleteFromWishlist={(id: number) => deleteFromWishlist({ id })}
-            isWishlistUpdating={isWishlistUpdating}
-            cart={cart}
-            wishlist={wishlist}
-          />
-        ))}
+      <div className={styles.contentWrapper}>
+        <h2 className={styles.header}>
+          Wishlist {wishlist.length !== 0 ? `(${wishlist.length})` : null}
+        </h2>
+        <div className={styles.productsWrapper}>
+          {products.map((product: ProductDataType) => (
+            <Product
+              id={product.id}
+              key={product.header}
+              url={product.url}
+              alt={product.alt}
+              header={product.header}
+              price={product.price}
+              priceAfterDiscount={product.priceAfterDiscount}
+              stars={product.stars}
+              opinions={product.opinions}
+              addToCart={(id: number) => addToCart({ id })}
+              deleteFromCart={(id: number) => deleteFromCart({ id })}
+              isCartUpdating={isCartUpdating}
+              addToWishlist={(id: number) => addToWishlist({ id })}
+              deleteFromWishlist={(id: number) => deleteFromWishlist({ id })}
+              isWishlistUpdating={isWishlistUpdating}
+              cart={cart}
+              wishlist={wishlist}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

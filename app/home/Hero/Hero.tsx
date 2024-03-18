@@ -5,8 +5,10 @@ import MessageOfTheDay from "./MessageOfTheDay/MessageOfTheDay";
 export default function Hero() {
   return (
     <div className={styles.hero}>
-      <Categories />
-      <MessageOfTheDay />
+      <div className={styles.contentWrapper}>
+        <Categories />
+        <MessageOfTheDay />
+      </div>
     </div>
   );
 }
