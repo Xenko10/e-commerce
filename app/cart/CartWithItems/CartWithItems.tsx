@@ -1,9 +1,9 @@
 import styles from "./CartWithItems.module.css";
 import ProductInCart from "./ProductInCart/ProductInCart";
-import { ProductInCartDataType } from "../../../types";
+import { ProductInCartDTO } from "../../../types";
 
 type Products = {
-  products: ProductInCartDataType[];
+  products: ProductInCartDTO[];
 };
 
 export default function CartWithItems({ products }: Products) {
@@ -15,7 +15,7 @@ export default function CartWithItems({ products }: Products) {
         <div>Quantity</div>
         <div className={styles.subtotal}>Subtotal</div>
       </div>
-      {products.map((product: ProductInCartDataType) => (
+      {products.map((product: ProductInCartDTO) => (
         <div className={styles.row} key={product.header}>
           <ProductInCart
             url={product.url}

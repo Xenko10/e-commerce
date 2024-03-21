@@ -4,24 +4,7 @@ import Wishlist from "./Actions/Wishlist";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../constant";
-
-type Id = { id: number };
-type SetStateFunction = React.Dispatch<React.SetStateAction<Id[]>>;
-
-type ProductProps = {
-  id: number;
-  url: string;
-  alt: string;
-  header: string;
-  price: number;
-  priceAfterDiscount: number;
-  stars: number;
-  opinions: number;
-  cart: Id[];
-  setCart: SetStateFunction;
-  wishlist: Id[];
-  setWishlist: SetStateFunction;
-};
+import { ProductWithActionsDTO } from "../../../types";
 
 export default function Product({
   id,
@@ -36,7 +19,7 @@ export default function Product({
   setCart,
   wishlist,
   setWishlist,
-}: ProductProps) {
+}: ProductWithActionsDTO) {
   const [isCartUpdating, setIsCartUpdating] = useState(false);
   const [isWishlistUpdating, setIsWishlistUpdating] = useState(false);
 

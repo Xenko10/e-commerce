@@ -1,5 +1,5 @@
 import styles from "./ProductInCart.module.css";
-import { ProductInCartDataType } from "../../../../types";
+import { ProductInCartDTO } from "../../../../types";
 
 export default function ProductInCart({
   url,
@@ -7,7 +7,7 @@ export default function ProductInCart({
   header,
   price,
   priceAfterDiscount,
-}: ProductInCartDataType) {
+}: ProductInCartDTO) {
   return (
     <>
       <div className={styles.imgProductNameWrapper}>

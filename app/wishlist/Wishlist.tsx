@@ -5,20 +5,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../constant";
 import Product from "../components/Product/Product";
-
-type ProductDataType = {
-  id: number;
-  url: string;
-  alt: string;
-  header: string;
-  price: number;
-  priceAfterDiscount: number;
-  stars: number;
-  opinions: number;
-};
+import { ProductWithActionsDTO } from "../../types";
 
 export default function Wishlist() {
-  const [products, setProducts] = useState<ProductDataType[]>([]);
+  const [products, setProducts] = useState<ProductWithActionsDTO[]>([]);
 
   const [wishlist, setWishlist] = useState<{ id: number }[]>([]);
   useEffect(() => {
@@ -55,7 +45,7 @@ export default function Wishlist() {
           Wishlist {wishlist.length !== 0 ? `(${wishlist.length})` : null}
         </h2>
         <div className={styles.productsWrapper}>
-          {products.map((product: ProductDataType) => (
+          {products.map((product: ProductWithActionsDTO) => (
             <Product
               id={product.id}
               key={product.header}

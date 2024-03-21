@@ -16,17 +16,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
 import { API_URL } from "../../../../constant";
-
-type ProductDataType = {
-  id: number;
-  url: string;
-  alt: string;
-  header: string;
-  price: number;
-  priceAfterDiscount: number;
-  stars: number;
-  opinions: number;
-};
+import { ProductDTO } from "../../../../types";
 
 export default function ImageSlider() {
   const [slides, setSlides] = useState(1);
@@ -47,7 +37,7 @@ export default function ImageSlider() {
     }
   }, [isMediumScreen, isSmallScreen, isSmartphone]);
 
-  const [products, setProducts] = useState<ProductDataType[]>([]);
+  const [products, setProducts] = useState<ProductDTO[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       await axios.get(`${API_URL}/products`).then((response) => {
@@ -91,7 +81,7 @@ export default function ImageSlider() {
       visibleSlides={slides}
       dragEnabled={false}>
       <Slider>
-        {products.map((product: ProductDataType) => (
+        {products.map((product: ProductDTO) => (
           <Slide index={product.id} key={product.id} className={styles.slide}>
             <Product
               id={product.id}

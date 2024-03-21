@@ -5,11 +5,11 @@ import EmptyCart from "./EmptyCart/EmptyCart";
 import CartWithItems from "./CartWithItems/CartWithItems";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../constant";
-import { ProductInCartDataType } from "../../types";
+import { ProductInCartDTO } from "../../types";
 import axios from "axios";
 
 export default function Cart() {
-  const [products, setProducts] = useState<ProductInCartDataType[]>([]);
+  const [products, setProducts] = useState<ProductInCartDTO[]>([]);
   const [didFetchData, setDidFetchData] = useState(false);
 
   const [isSomethingInCart, setIsSomethingInCart] = useState(false);
