@@ -1,0 +1,19 @@
+.productInCart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  font-size: 1rem;
+}
+
+.imgProductNameWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.imgProductNameWrapper > img {
+  width: 50px;
+  height: auto;
+}
