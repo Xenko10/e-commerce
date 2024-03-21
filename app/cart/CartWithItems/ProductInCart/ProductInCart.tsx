@@ -37,15 +37,15 @@ export default function ProductInCart({
   }
 
   return (
-    <>
-      <div
-        className={styles.imgProductNameWrapper}
-        onMouseOver={() => {
-          setIsMouseOver(true);
-        }}
-        onMouseLeave={() => {
-          setIsMouseOver(false);
-        }}>
+    <div
+      className={styles.row}
+      onMouseOver={() => {
+        setIsMouseOver(true);
+      }}
+      onMouseLeave={() => {
+        setIsMouseOver(false);
+      }}>
+      <div className={styles.imgProductNameWrapper}>
         <div className={styles.imgWrapper}>
           <div
             className={`${styles.deleteFromCart} ${
@@ -61,6 +61,6 @@ export default function ProductInCart({
       <div>${priceAfterDiscount ? priceAfterDiscount : price}</div>
       <div>1</div>
       <div>${priceAfterDiscount ? priceAfterDiscount : price}</div>
-    </>
+    </div>
   );
 }

@@ -21,17 +21,16 @@ export default function CartWithItems({
         <div className={styles.subtotal}>Subtotal</div>
       </div>
       {products.map((product: ProductInCartDTO) => (
-        <div className={styles.row} key={product.header}>
-          <ProductInCart
-            id={product.id}
-            url={product.url}
-            alt={product.alt}
-            header={product.header}
-            price={product.price}
-            priceAfterDiscount={product.priceAfterDiscount}
-            setProducts={setProducts}
-          />
-        </div>
+        <ProductInCart
+          key={product.header}
+          id={product.id}
+          url={product.url}
+          alt={product.alt}
+          header={product.header}
+          price={product.price}
+          priceAfterDiscount={product.priceAfterDiscount}
+          setProducts={setProducts}
+        />
       ))}
     </div>
   );
