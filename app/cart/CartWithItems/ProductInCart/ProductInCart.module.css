@@ -11,6 +11,31 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  position: relative;
+}
+
+.deleteFromCart {
+  position: absolute;
+  background-color: #db4444;
+  color: white;
+  top: -0.5rem;
+  left: -0.5rem;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  cursor: pointer;
+  user-select: none;
+
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible;
 }
 
 .imgWrapper {

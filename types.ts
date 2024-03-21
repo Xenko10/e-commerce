@@ -30,6 +30,7 @@ export type ProductWithActionsDTO = {
 };
 
 export type ProductInCartDTO = {
+  id: number;
   url: string;
   alt: string;
   header: string;

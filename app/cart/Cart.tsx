@@ -25,6 +25,7 @@ export default function Cart() {
       const productData = productDataResponses.map((response) => {
         const data = response.data;
         return {
+          id: data.id,
           url: data.url,
           alt: data.alt,
           header: data.header,
@@ -43,7 +44,7 @@ export default function Cart() {
       <div className={styles.contentWrapper}>
         {didFetchData ? (
           isSomethingInCart ? (
-            <CartWithItems products={products} />
+            <CartWithItems products={products} setProducts={setProducts} />
           ) : (
             <EmptyCart />
           )
