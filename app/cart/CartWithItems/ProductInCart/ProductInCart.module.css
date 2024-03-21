@@ -13,7 +13,17 @@
   gap: 1rem;
 }
 
-.imgProductNameWrapper > img {
+.imgWrapper {
+  height: 50px;
   width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgWrapper > img {
+  max-width: 50px;
+  max-height: 50px;
+  width: auto;
   height: auto;
 }
