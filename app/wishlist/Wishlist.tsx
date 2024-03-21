@@ -37,18 +37,7 @@ export default function Wishlist() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios.get(`${API_URL}/wishlist`).then((response) => {
-        const data = response.data;
-        setWishlist(data);
-      });
-    };
-    fetchData();
-  }, []);
-
   const [cart, setCart] = useState<{ id: number }[]>([]);
-
   useEffect(() => {
     const fetchData = async () => {
       await axios.get(`${API_URL}/cart`).then((response) => {
