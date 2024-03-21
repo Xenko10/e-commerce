@@ -10,7 +10,7 @@ import axios from "axios";
 
 export default function Cart() {
   const [products, setProducts] = useState<ProductInCartDTO[]>([]);
-  const [didFetchData, setDidFetchData] = useState(false);
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
   const [isSomethingInCart, setIsSomethingInCart] = useState(false);
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Cart() {
         };
       });
       setProducts(productData);
-      setDidFetchData(true);
+      setIsDataFetched(true);
     };
     fetchData();
   }, []);
@@ -42,7 +42,7 @@ export default function Cart() {
   return (
     <div>
       <div className={styles.contentWrapper}>
-        {didFetchData ? (
+        {isDataFetched ? (
           isSomethingInCart ? (
             <CartWithItems products={products} setProducts={setProducts} />
           ) : (
