@@ -34,20 +34,45 @@ export default function CartWithItems({
           quantity={product.quantity}
         />
       ))}
-      <div>
-        <div>Cart total:</div>
-        <div>
-          $
-          {products.reduce(
-            (sum, addend) =>
-              sum +
-              addend.quantity *
-                (addend.priceAfterDiscount
-                  ? addend.priceAfterDiscount
-                  : addend.price),
-            0
-          )}
+      <div className={styles.total}>
+        <h3>Cart Total:</h3>
+        <div className={styles.totalRow}>
+          <div>Subtotal: </div>
+          <div>
+            $
+            {products.reduce(
+              (sum, addend) =>
+                sum +
+                addend.quantity *
+                  (addend.priceAfterDiscount
+                    ? addend.priceAfterDiscount
+                    : addend.price),
+              0
+            )}
+          </div>
         </div>
+        <hr />
+        <div className={styles.totalRow}>
+          <div>Shipping:</div>
+          <div>Free</div>
+        </div>
+        <hr />
+        <div className={styles.totalRow}>
+          <div>Total:</div>
+          <div>
+            $
+            {products.reduce(
+              (sum, addend) =>
+                sum +
+                addend.quantity *
+                  (addend.priceAfterDiscount
+                    ? addend.priceAfterDiscount
+                    : addend.price),
+              0
+            )}
+          </div>
+        </div>
+        <button>Process to checkout</button>
       </div>
     </div>
   );
