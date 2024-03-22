@@ -1,4 +1,5 @@
 import styles from "./CartWithItems.module.css";
+// powinieneś miec eslint do sprawdzania tego typu rzeczy
 import axios from "axios";
 import ProductInCart from "./ProductInCart/ProductInCart";
 import { ProductInCartDTO } from "../../../types";
@@ -13,6 +14,18 @@ export default function CartWithItems({
 }: Products & {
   setProducts: React.Dispatch<React.SetStateAction<ProductInCartDTO[]>>;
 }) {
+  const subtotal = products.reduce(
+    (sum, addend) =>
+      sum +
+      addend.quantity *
+        (addend.priceAfterDiscount ? addend.priceAfterDiscount : addend.price),
+    0,
+  );
+
+  const shipping = 0;
+
+  const total = subtotal + shipping;
+
   return (
     <div className={styles.cartWithItems}>
       <div className={styles.row}>
@@ -21,7 +34,7 @@ export default function CartWithItems({
         <div>Quantity</div>
         <div className={styles.subtotal}>Subtotal</div>
       </div>
-      {products.map((product: ProductInCartDTO) => (
+      {products.map((product) => (
         <ProductInCart
           key={product.header}
           id={product.id}
@@ -38,18 +51,7 @@ export default function CartWithItems({
         <h3>Cart Total:</h3>
         <div className={styles.totalRow}>
           <div>Subtotal: </div>
-          <div>
-            $
-            {products.reduce(
-              (sum, addend) =>
-                sum +
-                addend.quantity *
-                  (addend.priceAfterDiscount
-                    ? addend.priceAfterDiscount
-                    : addend.price),
-              0
-            )}
-          </div>
+          <div>$ {subtotal}</div>
         </div>
         <hr />
         <div className={styles.totalRow}>
@@ -59,18 +61,7 @@ export default function CartWithItems({
         <hr />
         <div className={styles.totalRow}>
           <div>Total:</div>
-          <div>
-            $
-            {products.reduce(
-              (sum, addend) =>
-                sum +
-                addend.quantity *
-                  (addend.priceAfterDiscount
-                    ? addend.priceAfterDiscount
-                    : addend.price),
-              0
-            )}
-          </div>
+          <div>$ {total}</div>
         </div>
         <button>Process to checkout</button>
       </div>

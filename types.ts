@@ -1,4 +1,4 @@
-// DTO - Data Type Object
+// DTO - Data Transfer Object
 
 export type ProductDTO = {
   id: number;
@@ -11,15 +11,7 @@ export type ProductDTO = {
   opinions: number;
 };
 
-export type ProductWithActionsDTO = {
-  id: number;
-  url: string;
-  alt: string;
-  header: string;
-  price: number;
-  priceAfterDiscount: number;
-  stars: number;
-  opinions: number;
+export type ProductWithActionsDTO = ProductDTO & {
   cart: { id: number; quantity: number }[];
   setCart: React.Dispatch<
     React.SetStateAction<{ id: number; quantity: number }[]>
