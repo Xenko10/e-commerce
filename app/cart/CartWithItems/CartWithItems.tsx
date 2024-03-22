@@ -1,4 +1,5 @@
 import styles from "./CartWithItems.module.css";
+import axios from "axios";
 import ProductInCart from "./ProductInCart/ProductInCart";
 import { ProductInCartDTO } from "../../../types";
 
@@ -34,7 +35,7 @@ export default function CartWithItems({
         />
       ))}
       <div>
-        Cart total:
+        <div>Cart total:</div>
         <div>
           $
           {products.reduce(

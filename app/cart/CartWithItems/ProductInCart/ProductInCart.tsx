@@ -19,7 +19,7 @@ export default function ProductInCart({
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [isCartUpdating, setIsCartUpdating] = useState(false);
 
-  function deleteFromCart(id: number) {
+  function deleteFromCart() {
     try {
       if (!isCartUpdating) {
         setIsCartUpdating(true);
@@ -31,6 +31,18 @@ export default function ProductInCart({
           });
           setIsCartUpdating(false);
         });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function updateQuantity(quantity: number) {
+    try {
+      if (!isCartUpdating) {
+        setIsCartUpdating(true);
+        axios.patch(`${API_URL}/cart/${id}`, { quantity: quantity });
+        setIsCartUpdating(false);
       }
     } catch (error) {
       console.error(error);
@@ -52,7 +64,7 @@ export default function ProductInCart({
             className={`${styles.deleteFromCart} ${
               isMouseOver ? styles.show : null
             }`}
-            onClick={() => deleteFromCart(id)}>
+            onClick={() => deleteFromCart()}>
             X
           </div>
           <img src={`/img/flashsales/${url}`} alt={alt} />
@@ -67,6 +79,7 @@ export default function ProductInCart({
           className={styles.quantityInput}
           onChange={(e) => {
             if (Number(e.target.value) >= 0 && Number(e.target.value) <= 10) {
+              updateQuantity(Number(e.target.value));
               setProducts((prevProducts) => {
                 return prevProducts.map((prevProduct) => {
                   if (prevProduct.id === id) {
