@@ -1,8 +1,5 @@
 // DTO - Data Type Object
 
-type Id = { id: number };
-type SetStateFunction = React.Dispatch<React.SetStateAction<Id[]>>;
-
 export type ProductDTO = {
   id: number;
   url: string;
@@ -23,10 +20,12 @@ export type ProductWithActionsDTO = {
   priceAfterDiscount: number;
   stars: number;
   opinions: number;
-  cart: Id[];
-  setCart: SetStateFunction;
-  wishlist: Id[];
-  setWishlist: SetStateFunction;
+  cart: { id: number; quantity: number }[];
+  setCart: React.Dispatch<
+    React.SetStateAction<{ id: number; quantity: number }[]>
+  >;
+  wishlist: { id: number }[];
+  setWishlist: React.Dispatch<React.SetStateAction<{ id: number }[]>>;
 };
 
 export type ProductInCartDTO = {

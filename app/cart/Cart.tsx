@@ -12,28 +12,31 @@ export default function Cart() {
   const [products, setProducts] = useState<ProductInCartDTO[]>([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
+  const [cart, setCart] = useState<{ id: number; quantity: number }[]>([]);
   const [isSomethingInCart, setIsSomethingInCart] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`${API_URL}/cart`);
       const cartData = response.data;
-      setIsSomethingInCart(cartData.length !== 0);
-      const productDataPromises = cartData.map((item: { id: number }) =>
-        axios.get(`${API_URL}/products/${item.id}`)
-      );
-      const productDataResponses = await Promise.all(productDataPromises);
-      const productData = productDataResponses.map((response) => {
-        const data = response.data;
-        return {
-          id: data.id,
-          url: data.url,
-          alt: data.alt,
-          header: data.header,
-          price: data.price,
-          priceAfterDiscount: data.priceAfterDiscount,
-        };
-      });
-      setProducts(productData);
+      if (cartData.length !== 0) {
+        setIsSomethingInCart(true);
+        const productDataPromises = cartData.map((item: { id: number }) =>
+          axios.get(`${API_URL}/products/${item.id}`)
+        );
+        const productDataResponses = await Promise.all(productDataPromises);
+        const productData = productDataResponses.map((response) => {
+          const data = response.data;
+          return {
+            id: data.id,
+            url: data.url,
+            alt: data.alt,
+            header: data.header,
+            price: data.price,
+            priceAfterDiscount: data.priceAfterDiscount,
+          };
+        });
+        setProducts(productData);
+      }
       setIsDataFetched(true);
     };
     fetchData();
@@ -43,7 +46,7 @@ export default function Cart() {
     <div>
       <div className={styles.contentWrapper}>
         {isDataFetched ? (
-          isSomethingInCart ? (
+          isSomethingInCart && products.length !== 0 ? (
             <CartWithItems products={products} setProducts={setProducts} />
           ) : (
             <EmptyCart />

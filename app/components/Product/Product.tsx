@@ -30,10 +30,12 @@ export default function Product({
       });
       if (!isInCart && !isCartUpdating) {
         setIsCartUpdating(true);
-        axios.post(`${API_URL}/cart`, { id: product.id }).then((response) => {
-          setCart((prevCart) => [...prevCart, response.data]);
-          setIsCartUpdating(false);
-        });
+        axios
+          .post(`${API_URL}/cart`, { id: product.id, quantity: 1 })
+          .then((response) => {
+            setCart((prevCart) => [...prevCart, response.data]);
+            setIsCartUpdating(false);
+          });
       }
     } catch (error) {
       console.error(error);

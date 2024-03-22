@@ -32,7 +32,7 @@ export default function Wishlist() {
     fetchData();
   }, []);
 
-  const [cart, setCart] = useState<{ id: number }[]>([]);
+  const [cart, setCart] = useState<{ id: number; quantity: number }[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       await axios.get(`${API_URL}/cart`).then((response) => {
