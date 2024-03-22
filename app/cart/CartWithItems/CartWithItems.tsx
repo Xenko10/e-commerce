@@ -30,6 +30,7 @@ export default function CartWithItems({
           price={product.price}
           priceAfterDiscount={product.priceAfterDiscount}
           setProducts={setProducts}
+          quantity={product.quantity}
         />
       ))}
     </div>

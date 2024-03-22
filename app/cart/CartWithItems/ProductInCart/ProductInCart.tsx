@@ -12,6 +12,7 @@ export default function ProductInCart({
   price,
   priceAfterDiscount,
   setProducts,
+  quantity,
 }: ProductInCartDTO & {
   setProducts: React.Dispatch<React.SetStateAction<ProductInCartDTO[]>>;
 }) {
@@ -59,7 +60,7 @@ export default function ProductInCart({
         <div className={styles.productName}>{header}</div>
       </div>
       <div>${priceAfterDiscount ? priceAfterDiscount : price}</div>
-      <div>1</div>
+      <div>{quantity}</div>
       <div>${priceAfterDiscount ? priceAfterDiscount : price}</div>
     </div>
   );

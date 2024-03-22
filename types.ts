@@ -35,4 +35,5 @@ export type ProductInCartDTO = {
   header: string;
   price: number;
   priceAfterDiscount?: number;
+  quantity: number;
 };

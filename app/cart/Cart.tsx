@@ -12,20 +12,26 @@ export default function Cart() {
   const [products, setProducts] = useState<ProductInCartDTO[]>([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
-  const [cart, setCart] = useState<{ id: number; quantity: number }[]>([]);
   const [isSomethingInCart, setIsSomethingInCart] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`${API_URL}/cart`);
       const cartData = response.data;
-      if (cartData.length !== 0) {
+      if (cartData.length > 0) {
         setIsSomethingInCart(true);
-        const productDataPromises = cartData.map((item: { id: number }) =>
-          axios.get(`${API_URL}/products/${item.id}`)
+        const productDataPromises = cartData.map(
+          (item: { id: number; quantity: number }) =>
+            axios.get(`${API_URL}/products/${item.id}`)
         );
         const productDataResponses = await Promise.all(productDataPromises);
-        const productData = productDataResponses.map((response) => {
+        const productData = productDataResponses.map((response, index) => {
           const data = response.data;
+          let quantity;
+          if (cartData[index].id == data.id) {
+            quantity = cartData[index].quantity;
+          } else {
+            quantity = 1;
+          }
           return {
             id: data.id,
             url: data.url,
@@ -33,6 +39,7 @@ export default function Cart() {
             header: data.header,
             price: data.price,
             priceAfterDiscount: data.priceAfterDiscount,
+            quantity: quantity,
           };
         });
         setProducts(productData);
