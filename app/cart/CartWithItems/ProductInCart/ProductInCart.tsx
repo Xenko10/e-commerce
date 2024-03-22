@@ -60,8 +60,31 @@ export default function ProductInCart({
         <div className={styles.productName}>{header}</div>
       </div>
       <div>${priceAfterDiscount ? priceAfterDiscount : price}</div>
-      <div>{quantity}</div>
-      <div>${priceAfterDiscount ? priceAfterDiscount : price}</div>
+      <div>
+        <input
+          type='number'
+          value={quantity}
+          className={styles.quantityInput}
+          onChange={(e) => {
+            if (Number(e.target.value) >= 0 && Number(e.target.value) <= 10) {
+              setProducts((prevProducts) => {
+                return prevProducts.map((prevProduct) => {
+                  if (prevProduct.id === id) {
+                    return {
+                      ...prevProduct,
+                      quantity: Number(e.target.value),
+                    };
+                  }
+                  return prevProduct;
+                });
+              });
+            }
+          }}
+        />
+      </div>
+      <div>
+        ${priceAfterDiscount ? quantity * priceAfterDiscount : quantity * price}
+      </div>
     </div>
   );
 }

@@ -33,6 +33,21 @@ export default function CartWithItems({
           quantity={product.quantity}
         />
       ))}
+      <div>
+        Cart total:
+        <div>
+          $
+          {products.reduce(
+            (sum, addend) =>
+              sum +
+              addend.quantity *
+                (addend.priceAfterDiscount
+                  ? addend.priceAfterDiscount
+                  : addend.price),
+            0
+          )}
+        </div>
+      </div>
     </div>
   );
 }
