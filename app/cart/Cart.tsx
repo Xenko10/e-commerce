@@ -26,12 +26,8 @@ export default function Cart() {
         const productDataResponses = await Promise.all(productDataPromises);
         const productData = productDataResponses.map((response, index) => {
           const data = response.data;
-          let quantity;
-          if (cartData[index].id == data.id) {
-            quantity = cartData[index].quantity;
-          } else {
-            quantity = 1;
-          }
+          const quantity =
+            cartData[index].id == data.id ? cartData[index].quantity : 1;
           return {
             id: data.id,
             url: data.url,
