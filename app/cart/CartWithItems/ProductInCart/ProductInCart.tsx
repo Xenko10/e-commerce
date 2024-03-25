@@ -1,6 +1,6 @@
 import styles from "./ProductInCart.module.css";
 import axios from "axios";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { ProductInCartDTO } from "../../../../types";
 import { API_URL } from "../../../../constant";
 
@@ -49,6 +49,25 @@ export default function ProductInCart({
     }
   }
 
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    {
+      if (Number(e.target.value) >= 0 && Number(e.target.value) <= 10) {
+        updateQuantity(Number(e.target.value));
+        setProducts((prevProducts) => {
+          return prevProducts.map((prevProduct) => {
+            if (prevProduct.id === id) {
+              return {
+                ...prevProduct,
+                quantity: Number(e.target.value),
+              };
+            }
+            return prevProduct;
+          });
+        });
+      }
+    }
+  }
+
   return (
     <div
       className={styles.row}
@@ -78,20 +97,7 @@ export default function ProductInCart({
           value={quantity}
           className={styles.quantityInput}
           onChange={(e) => {
-            if (Number(e.target.value) >= 0 && Number(e.target.value) <= 10) {
-              updateQuantity(Number(e.target.value));
-              setProducts((prevProducts) => {
-                return prevProducts.map((prevProduct) => {
-                  if (prevProduct.id === id) {
-                    return {
-                      ...prevProduct,
-                      quantity: Number(e.target.value),
-                    };
-                  }
-                  return prevProduct;
-                });
-              });
-            }
+            handleInputChange(e);
           }}
         />
       </div>

@@ -16,7 +16,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
 import { API_URL } from "../../../../constant";
-import { ProductDTO } from "../../../../types";
+import { ProductDTO, WishlistDTO, CartDTO } from "../../../../types";
 
 export default function ImageSlider() {
   const [slides, setSlides] = useState(1);
@@ -40,7 +40,7 @@ export default function ImageSlider() {
   const [products, setProducts] = useState<ProductDTO[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`${API_URL}/products`).then((response) => {
+      await axios.get<ProductDTO[]>(`${API_URL}/products`).then((response) => {
         const data = response.data;
         setProducts(data);
       });
@@ -48,10 +48,10 @@ export default function ImageSlider() {
     fetchData();
   }, []);
 
-  const [cart, setCart] = useState<{ id: number; quantity: number }[]>([]);
+  const [cart, setCart] = useState<CartDTO>([]);
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`${API_URL}/cart`).then((response) => {
+      await axios.get<CartDTO>(`${API_URL}/cart`).then((response) => {
         const data = response.data;
         setCart(data);
       });
@@ -59,10 +59,10 @@ export default function ImageSlider() {
     fetchData();
   }, []);
 
-  const [wishlist, setWishlist] = useState<{ id: number }[]>([]);
+  const [wishlist, setWishlist] = useState<WishlistDTO>([]);
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`${API_URL}/wishlist`).then((response) => {
+      await axios.get<WishlistDTO>(`${API_URL}/wishlist`).then((response) => {
         const data = response.data;
         setWishlist(data);
       });
@@ -81,7 +81,7 @@ export default function ImageSlider() {
       visibleSlides={slides}
       dragEnabled={false}>
       <Slider>
-        {products.map((product: ProductDTO) => (
+        {products.map((product) => (
           <Slide index={product.id} key={product.id} className={styles.slide}>
             <Product
               id={product.id}

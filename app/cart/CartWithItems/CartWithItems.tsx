@@ -1,5 +1,4 @@
 import styles from "./CartWithItems.module.css";
-import axios from "axios";
 import ProductInCart from "./ProductInCart/ProductInCart";
 import { ProductInCartDTO } from "../../../types";
 
@@ -22,7 +21,7 @@ export default function CartWithItems({
   );
 
   const deliveryPrice = 10;
-  const shipping = subtotal >= 1000 ? 0 : deliveryPrice;
+  const shipping = subtotal >= 1000 || subtotal === 0 ? 0 : deliveryPrice;
 
   const total = subtotal + shipping;
   return (
@@ -33,7 +32,7 @@ export default function CartWithItems({
         <div>Quantity</div>
         <div className={styles.subtotal}>Subtotal</div>
       </div>
-      {products.map((product: ProductInCartDTO) => (
+      {products.map((product) => (
         <ProductInCart
           key={product.header}
           id={product.id}
@@ -55,7 +54,7 @@ export default function CartWithItems({
         <hr />
         <div className={styles.totalRow}>
           <div>Shipping:</div>
-          <div>{shipping === 0 ? "Free" : deliveryPrice + "$"}</div>
+          <div>{shipping === 0 ? "Free" : "$" + deliveryPrice}</div>
         </div>
         <hr />
         <div className={styles.totalRow}>

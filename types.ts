@@ -11,13 +11,14 @@ export type ProductDTO = {
   opinions: number;
 };
 
+export type CartDTO = { id: number; quantity: number }[];
+export type WishlistDTO = { id: number }[];
+
 export type ProductWithActionsDTO = ProductDTO & {
-  cart: { id: number; quantity: number }[];
-  setCart: React.Dispatch<
-    React.SetStateAction<{ id: number; quantity: number }[]>
-  >;
-  wishlist: { id: number }[];
-  setWishlist: React.Dispatch<React.SetStateAction<{ id: number }[]>>;
+  cart: CartDTO;
+  setCart: React.Dispatch<React.SetStateAction<CartDTO>>;
+  wishlist: WishlistDTO;
+  setWishlist: React.Dispatch<React.SetStateAction<WishlistDTO>>;
 };
 
 export type ProductInCartDTO = {

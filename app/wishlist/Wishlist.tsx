@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../constant";
 import Product from "../components/Product/Product";
-import { ProductWithActionsDTO } from "../../types";
+import { ProductWithActionsDTO, WishlistDTO, CartDTO } from "../../types";
 import EmptyWishlist from "./EmptyWishlist/EmptyWishlist";
 
 export default function Wishlist() {
@@ -13,16 +13,16 @@ export default function Wishlist() {
   const [isDataFetched, setIsDataFetched] = useState(false);
 
   const [isSomethingInWishlist, setIsSomethingInWishlist] = useState(false);
-  const [wishlist, setWishlist] = useState<{ id: number }[]>([]);
+  const [wishlist, setWishlist] = useState<WishlistDTO>([]);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${API_URL}/wishlist`);
+      const response = await axios.get<WishlistDTO>(`${API_URL}/wishlist`);
       const wishlistData = response.data;
       setIsSomethingInWishlist(wishlistData.length !== 0);
       setWishlist(wishlistData);
 
-      const productDataPromises = wishlistData.map((item: { id: number }) =>
-        axios.get(`${API_URL}/products/${item.id}`)
+      const productDataPromises = wishlistData.map((item) =>
+        axios.get<ProductWithActionsDTO>(`${API_URL}/products/${item.id}`)
       );
       const productDataResponses = await Promise.all(productDataPromises);
       const productData = productDataResponses.map((response) => response.data);
@@ -32,10 +32,10 @@ export default function Wishlist() {
     fetchData();
   }, []);
 
-  const [cart, setCart] = useState<{ id: number; quantity: number }[]>([]);
+  const [cart, setCart] = useState<CartDTO>([]);
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`${API_URL}/cart`).then((response) => {
+      await axios.get<CartDTO>(`${API_URL}/cart`).then((response) => {
         const data = response.data;
         setCart(data);
       });
@@ -53,7 +53,7 @@ export default function Wishlist() {
                 Wishlist {wishlist.length !== 0 ? `(${wishlist.length})` : null}
               </h2>
               <div className={styles.productsWrapper}>
-                {products.map((product: ProductWithActionsDTO) => (
+                {products.map((product) => (
                   <Product
                     id={product.id}
                     key={product.header}
