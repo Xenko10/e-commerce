@@ -1,8 +1,9 @@
 import styles from "./ProductInCart.module.css";
 import axios from "axios";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useContext } from "react";
 import { ProductInCartDTO } from "../../../../types";
 import { API_URL } from "../../../../constant";
+import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 
 export default function ProductInCart({
   id,
@@ -16,6 +17,7 @@ export default function ProductInCart({
 }: ProductInCartDTO & {
   setProducts: React.Dispatch<React.SetStateAction<ProductInCartDTO[]>>;
 }) {
+  const { setCart } = useContext(ValuesContext);
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [isCartUpdating, setIsCartUpdating] = useState(false);
 
@@ -26,6 +28,11 @@ export default function ProductInCart({
         axios.delete(`${API_URL}/cart/${id}`).then(() => {
           setProducts((prevProducts) => {
             return prevProducts.filter((item) => {
+              return item.id !== id;
+            });
+          });
+          setCart((prevCart) => {
+            return prevCart.filter((item) => {
               return item.id !== id;
             });
           });
