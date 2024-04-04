@@ -1,25 +1,26 @@
 "use client";
 
 import styles from "./Wishlist.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { API_URL } from "../../constant";
 import Product from "../components/Product/Product";
 import { ProductWithActionsDTO, WishlistDTO, CartDTO } from "../../types";
 import EmptyWishlist from "./EmptyWishlist/EmptyWishlist";
+import { ValuesContext } from "../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 
 export default function Wishlist() {
+  const { cart, setCart, wishlist, setWishlist } = useContext(ValuesContext);
+
   const [products, setProducts] = useState<ProductWithActionsDTO[]>([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
   const [isSomethingInWishlist, setIsSomethingInWishlist] = useState(false);
-  const [wishlist, setWishlist] = useState<WishlistDTO>([]);
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get<WishlistDTO>(`${API_URL}/wishlist`);
       const wishlistData = response.data;
       setIsSomethingInWishlist(wishlistData.length !== 0);
-      setWishlist(wishlistData);
 
       const productDataPromises = wishlistData.map((item) =>
         axios.get<ProductWithActionsDTO>(`${API_URL}/products/${item.id}`)
@@ -28,17 +29,6 @@ export default function Wishlist() {
       const productData = productDataResponses.map((response) => response.data);
       setProducts(productData);
       setIsDataFetched(true);
-    };
-    fetchData();
-  }, []);
-
-  const [cart, setCart] = useState<CartDTO>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios.get<CartDTO>(`${API_URL}/cart`).then((response) => {
-        const data = response.data;
-        setCart(data);
-      });
     };
     fetchData();
   }, []);
