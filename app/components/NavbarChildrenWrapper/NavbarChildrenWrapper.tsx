@@ -1,5 +1,6 @@
 "use client";
 
+import styles from "./NavbarChildrenWrapper.module.css";
 import Navbar from "../Navbar/Navbar";
 import {
   createContext,

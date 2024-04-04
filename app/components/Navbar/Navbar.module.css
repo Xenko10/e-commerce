@@ -65,8 +65,33 @@
   gap: 1rem;
 }
 
-.actions > * {
+.search > img {
   cursor: pointer;
+}
+
+.action {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.action > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  background-color: #db4444;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  height: 1rem;
+  width: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search {
