@@ -101,7 +101,7 @@ export default function ProductInCart({
       <div>
         <input
           type='number'
-          value={quantity}
+          value={quantity.toString()}
           className={styles.quantityInput}
           onChange={(e) => {
             handleInputChange(e);
