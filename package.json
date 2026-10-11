@@ -10,8 +10,8 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^5.15.12",
     "axios": "1.20.0",
     "json-server": "^1.0.0-alpha.23",
