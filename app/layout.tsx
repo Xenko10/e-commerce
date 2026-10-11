@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header/Header";
 import { NavbarChildrenWrapper } from "./components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 import Footer from "./components/Footer/Footer";
+import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang='en'>
@@ -24,7 +25,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Header />
-        <NavbarChildrenWrapper children={children} />
+        <NavbarChildrenWrapper >
+            {children}
+        </NavbarChildrenWrapper>
         <Footer />
       </body>
     </html>

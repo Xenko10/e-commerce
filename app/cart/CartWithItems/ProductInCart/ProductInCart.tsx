@@ -1,6 +1,6 @@
 import styles from "./ProductInCart.module.css";
 import axios from "axios";
-import { ChangeEvent, useState, useContext } from "react";
+import { ChangeEvent, useState, useContext, SetStateAction, Dispatch } from "react";
 import { ProductInCartDTO } from "../../../../types";
 import { API_URL } from "../../../../constant";
 import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
@@ -16,7 +16,7 @@ export default function ProductInCart({
   setProducts,
   quantity,
 }: ProductInCartDTO & {
-  setProducts: React.Dispatch<React.SetStateAction<ProductInCartDTO[]>>;
+  setProducts: Dispatch<SetStateAction<ProductInCartDTO[]>>;
 }) {
   const { setCart } = useContext(ValuesContext);
   const [isMouseOver, setIsMouseOver] = useState(false);

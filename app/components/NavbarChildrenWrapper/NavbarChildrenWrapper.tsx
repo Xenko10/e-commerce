@@ -1,13 +1,12 @@
 "use client";
 
-import styles from "./NavbarChildrenWrapper.module.css";
 import Navbar from "../Navbar/Navbar";
 import {
   createContext,
   useState,
   useEffect,
   Dispatch,
-  SetStateAction,
+  SetStateAction, ReactNode,
 } from "react";
 import { API_URL } from "../../../constant";
 import { ProductDTO, CartDTO, WishlistDTO } from "../../../types";
@@ -26,7 +25,7 @@ export const ValuesContext = createContext<ContextData>(null!);
 export function NavbarChildrenWrapper({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   const [products, setProducts] = useState<ProductDTO[]>([]);
   useEffect(() => {

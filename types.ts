@@ -1,4 +1,4 @@
-// DTO - Data Type Object
+import { Dispatch, SetStateAction } from "react";
 
 export type ProductDTO = {
   id: number;
@@ -23,9 +23,9 @@ export type WishlistDTO = {
 
 export type ProductWithActionsDTO = ProductDTO & {
   cart: CartDTO;
-  setCart: React.Dispatch<React.SetStateAction<CartDTO>>;
+  setCart: Dispatch<SetStateAction<CartDTO>>;
   wishlist: WishlistDTO;
-  setWishlist: React.Dispatch<React.SetStateAction<WishlistDTO>>;
+  setWishlist: Dispatch<SetStateAction<WishlistDTO>>;
 };
 
 export type ProductInCartDTO = {

@@ -1,6 +1,7 @@
 import styles from "./CartWithItems.module.css";
 import ProductInCart from "./ProductInCart/ProductInCart";
 import { ProductInCartDTO } from "../../../types";
+import { Dispatch, SetStateAction } from "react";
 
 type Products = {
   products: ProductInCartDTO[];
@@ -10,7 +11,7 @@ export default function CartWithItems({
   products,
   setProducts,
 }: Products & {
-  setProducts: React.Dispatch<React.SetStateAction<ProductInCartDTO[]>>;
+  setProducts: Dispatch<SetStateAction<ProductInCartDTO[]>>;
 }) {
   const subtotal = products.reduce(
     (sum, addend) =>
