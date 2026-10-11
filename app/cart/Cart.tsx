@@ -20,15 +20,16 @@ export default function Cart() {
       if (cartData.length > 0) {
         setIsSomethingInCart(true);
         const productDataPromises = cartData.map((item) =>
-          axios.get(`${API_URL}/products/${item.id}`)
+          axios.get(`${API_URL}/products/${item.productId}`)
         );
         const productDataResponses = await Promise.all(productDataPromises);
         const productData = productDataResponses.map((response, index) => {
           const data = response.data;
           const quantity =
-            cartData[index].id == data.id ? cartData[index].quantity : 1;
+            cartData[index].productId == data.id ? cartData[index].quantity : 1;
           return {
             id: data.id,
+            cartId: cartData[index].id,
             url: data.url,
             alt: data.alt,
             header: data.header,

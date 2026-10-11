@@ -36,6 +36,7 @@ export default function CartWithItems({
         <ProductInCart
           key={product.header}
           id={product.id}
+          cartId={product.cartId}
           url={product.url}
           alt={product.alt}
           header={product.header}

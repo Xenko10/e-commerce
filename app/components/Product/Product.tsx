@@ -26,12 +26,12 @@ export default function Product({
   function addToCart(product: { id: number }) {
     try {
       const isInCart = cart?.find((item) => {
-        return item.id === product.id;
+        return item.productId === product.id;
       });
       if (!isInCart && !isCartUpdating) {
         setIsCartUpdating(true);
         axios
-          .post(`${API_URL}/cart`, { id: product.id, quantity: 1 })
+          .post(`${API_URL}/cart`, { productId: product.id, quantity: 1 })
           .then((response) => {
             setCart((prevCart) => [...prevCart, response.data]);
             setIsCartUpdating(false);
@@ -45,13 +45,15 @@ export default function Product({
   function deleteFromCart(product: { id: number }) {
     try {
       if (!isCartUpdating) {
+        const cartItem = cart.find((item) => item.productId === product.id);
+        if (!cartItem) {
+          return;
+        }
         setIsCartUpdating(true);
-        axios.delete(`${API_URL}/cart/${product.id}`).then(() => {
-          setCart((prevCart) => {
-            return prevCart.filter((item) => {
-              return item.id !== product.id;
-            });
-          });
+        axios.delete(`${API_URL}/cart/${cartItem.id}`).then(() => {
+          setCart((prevCart) =>
+            prevCart.filter((item) => item.productId !== product.id)
+          );
           setIsCartUpdating(false);
         });
       }
@@ -63,12 +65,12 @@ export default function Product({
   function addToWishlist(product: { id: number }) {
     try {
       const isInWishlist = wishlist?.find((item) => {
-        return item.id === product.id;
+        return item.productId === product.id;
       });
       if (!isInWishlist && !isWishlistUpdating) {
         setIsWishlistUpdating(true);
         axios
-          .post(`${API_URL}/wishlist`, { id: product.id })
+          .post(`${API_URL}/wishlist`, { productId: product.id })
           .then((response) => {
             setWishlist((prevWishlist) => [...prevWishlist, response.data]);
             setIsWishlistUpdating(false);
@@ -82,11 +84,17 @@ export default function Product({
   function deleteFromWishlist(product: { id: number }) {
     try {
       if (!isWishlistUpdating) {
+        const wishlistItem = wishlist.find(
+          (item) => item.productId === product.id
+        );
+        if (!wishlistItem) {
+          return;
+        }
         setIsWishlistUpdating(true);
-        axios.delete(`${API_URL}/wishlist/${product.id}`).then(() => {
+        axios.delete(`${API_URL}/wishlist/${wishlistItem.id}`).then(() => {
           setWishlist((prevWishlist) => {
             return prevWishlist.filter((item) => {
-              return item.id !== product.id;
+              return item.productId !== product.id;
             });
           });
           setIsWishlistUpdating(false);
@@ -147,10 +155,10 @@ export default function Product({
   }
 
   useEffect(() => {
-    if (!isCartUpdating && cart.some((item) => item.id === id)) {
+    if (!isCartUpdating && cart.some((item) => item.productId === id)) {
       setIsAddedToCart(true);
     }
-    if (!isWishlistUpdating && wishlist.some((item) => item.id === id)) {
+    if (!isWishlistUpdating && wishlist.some((item) => item.productId === id)) {
       setIsAddedToWishlist(true);
     }
   }, [cart, wishlist]);

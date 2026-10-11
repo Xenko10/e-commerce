@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { API_URL } from "../../constant";
 import Product from "../components/Product/Product";
-import { ProductWithActionsDTO, WishlistDTO, CartDTO } from "../../types";
+import { ProductWithActionsDTO, WishlistDTO } from "../../types";
 import EmptyWishlist from "./EmptyWishlist/EmptyWishlist";
 import { ValuesContext } from "../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 
@@ -23,7 +23,9 @@ export default function Wishlist() {
       setIsSomethingInWishlist(wishlistData.length !== 0);
 
       const productDataPromises = wishlistData.map((item) =>
-        axios.get<ProductWithActionsDTO>(`${API_URL}/products/${item.id}`)
+        axios.get<ProductWithActionsDTO>(
+          `${API_URL}/products/${item.productId}`
+        )
       );
       const productDataResponses = await Promise.all(productDataPromises);
       const productData = productDataResponses.map((response) => response.data);

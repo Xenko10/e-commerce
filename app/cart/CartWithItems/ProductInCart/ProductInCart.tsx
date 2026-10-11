@@ -7,6 +7,7 @@ import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarC
 
 export default function ProductInCart({
   id,
+  cartId,
   url,
   alt,
   header,
@@ -25,17 +26,15 @@ export default function ProductInCart({
     try {
       if (!isCartUpdating) {
         setIsCartUpdating(true);
-        axios.delete(`${API_URL}/cart/${id}`).then(() => {
+        axios.delete(`${API_URL}/cart/${cartId}`).then(() => {
           setProducts((prevProducts) => {
             return prevProducts.filter((item) => {
               return item.id !== id;
             });
           });
-          setCart((prevCart) => {
-            return prevCart.filter((item) => {
-              return item.id !== id;
-            });
-          });
+          setCart((prevCart) =>
+            prevCart.filter((item) => item.productId !== id)
+          );
           setIsCartUpdating(false);
         });
       }
@@ -48,7 +47,7 @@ export default function ProductInCart({
     try {
       if (!isCartUpdating) {
         setIsCartUpdating(true);
-        axios.patch(`${API_URL}/cart/${id}`, { quantity: quantity });
+        axios.patch(`${API_URL}/cart/${cartId}`, { quantity: quantity });
         setIsCartUpdating(false);
       }
     } catch (error) {

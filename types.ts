@@ -11,8 +11,15 @@ export type ProductDTO = {
   opinions: number;
 };
 
-export type CartDTO = { id: number; quantity: number }[];
-export type WishlistDTO = { id: number }[];
+export type CartDTO = {
+  id: string;
+  productId: number;
+  quantity: number;
+}[];
+export type WishlistDTO = {
+  id: string;
+  productId: number;
+}[];
 
 export type ProductWithActionsDTO = ProductDTO & {
   cart: CartDTO;
@@ -23,6 +30,7 @@ export type ProductWithActionsDTO = ProductDTO & {
 
 export type ProductInCartDTO = {
   id: number;
+  cartId: string;
   url: string;
   alt: string;
   header: string;
