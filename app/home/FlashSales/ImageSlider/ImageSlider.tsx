@@ -1,14 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, useContext } from "react";
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
+import { useEffect, useState, useContext, useRef } from "react";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperInstance } from "swiper";
 import Product from "../../../components/Product/Product";
 import styles from "./ImageSlider.module.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -18,6 +13,9 @@ import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarC
 
 export default function ImageSlider() {
   const [slides, setSlides] = useState(1);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const swiperRef = useRef<SwiperInstance | null>(null);
 
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1400px)" });
   const isSmallScreen = useMediaQuery({ query: "(max-width: 1100px)" });
@@ -38,19 +36,34 @@ export default function ImageSlider() {
   const { products, cart, wishlist, setCart, setWishlist } =
     useContext(ValuesContext);
 
+  const updateNavigationState = (swiper: SwiperInstance) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.update();
+      updateNavigationState(swiperRef.current);
+    }
+  }, [products.length, slides]);
+
   return (
-    <CarouselProvider
-      className={styles.sliderWrapper}
-      naturalSlideWidth={270}
-      naturalSlideHeight={340}
-      totalSlides={products.length}
-      infinite={true}
-      isPlaying={true}
-      visibleSlides={slides}
-      dragEnabled={false}>
-      <Slider>
+    <div className={styles.sliderWrapper}>
+      <Swiper
+        modules={[Autoplay]}
+        slidesPerView={slides}
+        spaceBetween={16}
+        autoplay={{ delay: 5000 }}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+          updateNavigationState(swiper);
+        }}
+        onSlideChange={updateNavigationState}
+        onUpdate={updateNavigationState}
+        className={styles.slider}>
         {products.map((product) => (
-          <Slide index={product.id} key={product.id} className={styles.slide}>
+          <SwiperSlide key={product.id} className={styles.slide}>
             <Product
               id={product.id}
               key={product.header}
@@ -66,17 +79,27 @@ export default function ImageSlider() {
               wishlist={wishlist}
               setWishlist={setWishlist}
             />
-          </Slide>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
       <div className={styles.buttonWrapper}>
-        <ButtonBack>
+        <button
+          type="button"
+          className={styles.previousButton}
+          aria-label="Previous products"
+          disabled={isBeginning}
+          onClick={() => swiperRef.current?.slidePrev()}>
           <ArrowBackIcon />
-        </ButtonBack>
-        <ButtonNext>
+        </button>
+        <button
+          type="button"
+          className={styles.nextButton}
+          aria-label="Next products"
+          disabled={isEnd}
+          onClick={() => swiperRef.current?.slideNext()}>
           <ArrowForwardIcon />
-        </ButtonNext>
+        </button>
       </div>
-    </CarouselProvider>
+    </div>
   );
 }
