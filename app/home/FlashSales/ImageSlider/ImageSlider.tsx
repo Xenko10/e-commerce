@@ -10,9 +10,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
 import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
+import { getSlidesPerView } from "./utils/getSlidesPerView";
 
 export default function ImageSlider() {
-  const [slides, setSlides] = useState(1);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const swiperRef = useRef<SwiperInstance | null>(null);
@@ -21,17 +21,11 @@ export default function ImageSlider() {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 1100px)" });
   const isSmartphone = useMediaQuery({ query: "(max-width: 600px)" });
 
-  useEffect(() => {
-    if (isSmartphone) {
-      setSlides(1);
-    } else if (isSmallScreen) {
-      setSlides(2);
-    } else if (isMediumScreen) {
-      setSlides(3);
-    } else {
-      setSlides(4);
-    }
-  }, [isMediumScreen, isSmallScreen, isSmartphone]);
+  const slides = getSlidesPerView(
+    isSmartphone,
+    isSmallScreen,
+    isMediumScreen,
+  );
 
   const { products, cart, wishlist, setCart, setWishlist } =
     useContext(ValuesContext);

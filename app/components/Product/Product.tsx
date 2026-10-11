@@ -1,7 +1,7 @@
 import styles from "./Product.module.css";
 import Cart from "./Actions/Cart";
 import Wishlist from "./Actions/Wishlist";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../constant";
 import { ProductWithActionsDTO } from "../../../types";
@@ -128,40 +128,27 @@ export default function Product({
   }
 
   const [isMouseOver, setIsMouseOver] = useState(false);
-  const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const isAddedToWishlist = wishlist.some((item) => item.productId === id);
+  const isAddedToCart = cart.some((item) => item.productId === id);
 
   let wishlistStroke = isAddedToWishlist ? "white" : "black";
   let cartStroke = isAddedToCart ? "white" : "black";
 
   function handleAddToCart() {
     if (!isAddedToCart && !isCartUpdating) {
-      setIsAddedToCart(true);
       addToCart({ id });
     } else if (isAddedToCart && !isCartUpdating) {
-      setIsAddedToCart(false);
       deleteFromCart({ id });
     }
   }
 
   function handleAddToWishlist() {
     if (!isAddedToWishlist && !isWishlistUpdating) {
-      setIsAddedToWishlist(true);
       addToWishlist({ id });
     } else if (isAddedToWishlist && !isWishlistUpdating) {
-      setIsAddedToWishlist(false);
       deleteFromWishlist({ id });
     }
   }
-
-  useEffect(() => {
-    if (!isCartUpdating && cart.some((item) => item.productId === id)) {
-      setIsAddedToCart(true);
-    }
-    if (!isWishlistUpdating && wishlist.some((item) => item.productId === id)) {
-      setIsAddedToWishlist(true);
-    }
-  }, [cart, wishlist]);
 
   return (
     <div className={styles.productWrapper}>
